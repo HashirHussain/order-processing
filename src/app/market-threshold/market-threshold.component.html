@@ -58,11 +58,11 @@
                                 <td scope="col">$ {{ _value.MKT_VAL_FROM }}</td>
                                 <td scope="col">$ {{ _value.MKT_VAL_TO}}</td>
                                 <td scope="col">{{ _value.VAR_THRESHOLD }} %</td>
-                                <td scope="col"><button type="button" (click)="onEdit(content, inx)"
-                                        class="btn-sm btn btn-secondary">Edit</button>
+                                <td scope="col">
+                                    <i class="fa fa-edit" aria-hidden="true" (click)="onEdit(content, inx)"></i>
                                 </td>
-                                <td scope="col"><button type="button" (click)="onDelete(inx)"
-                                        class="btn-sm btn btn-secondary">Delete</button>
+                                <td scope="col">
+                                    <i class="fa fa-trash" aria-hidden="true" (click)="onDelete(inx)"></i>
                                 </td>
                             </tr>
 
@@ -78,20 +78,23 @@
                         </tbody>
                     </table>
 
-                    <div class="d-flex p-2 pagination">
+                    <div class="d-flex p-2 pagination justify-content-between">
                         <ngb-pagination [collectionSize]="mvtData.length" [maxSize]="5" [ellipses]="false"
                             [rotate]="true" [(page)]="page" [pageSize]="pageSize" [boundaryLinks]="true">
                         </ngb-pagination>
 
-                        <select class="custom-select" style="width: auto;margin-left: 10px;" [(ngModel)]="pageSize">
-                            <option [ngValue]="3">3</option>
-                            <option [ngValue]="5">5</option>
-                            <option [ngValue]="10">10</option>
-                        </select>
+                        <div class="d-flex align-items-center">
+                            <select class="custom-select" style="width: auto;" [(ngModel)]="pageSize">
+                                <option [ngValue]="3">3</option>
+                                <option [ngValue]="5">5</option>
+                                <option [ngValue]="10">10</option>
+                            </select>
+                            <div class="ml-2">items per page</div>
+                        </div>
 
-                        <div class="table-refresh">
-                            <i class="fa fa-refresh" aria-hidden="true" (click)="onRefresh()"></i>
+                        <div class="table-refresh d-flex align-items-center">
                             <span>Total Records: {{mvtData.length}}</span>
+                            <i class="fa fa-refresh ml-4" aria-hidden="true" (click)="onRefresh()"></i>
                         </div>
                     </div>
                 </div>
@@ -160,17 +163,14 @@
                 </div>
             </div>
 
-            <div class="form-group row mb-2">
-                <div class="offset-md-2 col-md-4">
-                    <button class="btn btn-primary mr-3" style="width:80px;" type="submit">
-                        Save
-                    </button>
+            <div class="d-flex justify-content-center">
+                <button class="btn btn-primary mr-3" style="width:80px;" type="submit">
+                    Save
+                </button>
 
-                    <button class="btn btn-outline-secondary mr-3" style="width:80px;" (click)="closeModal()"
-                        type="button">
-                        Close
-                    </button>
-                </div>
+                <button class="btn btn-outline-secondary" style="width:80px;" (click)="closeModal()" type="button">
+                    Cancel
+                </button>
             </div>
 
         </form>
