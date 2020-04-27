@@ -1,0 +1,67 @@
+<div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">From</th>
+                <th scope="col">To</th>
+                <th scope="col">Variance Threshold</th>
+                <th scope="col">Edit</th>
+                <th scope="col">Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let _value of marketValueThreshold">
+                <td>$ {{ _value.MKT_VAL_FROM }}</td>
+                <td>$ {{ _value.MKT_VAL_TO}}</td>
+                <td>{{ _value.VAR_THRESHOLD }} %</td>
+                <td></td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="d-flex justify-content-between p-2 pagination">
+        <ngb-pagination [collectionSize]="collectionSize" [maxSize]="3" [ellipses]="false" [rotate]="true"
+            [(page)]="page" [pageSize]="pageSize" [boundaryLinks]="true">
+        </ngb-pagination>
+
+        <select class="custom-select" style="width: auto" [(ngModel)]="pageSize">
+            <option [ngValue]="3">3</option>
+            <option [ngValue]="5">5</option>
+            <option [ngValue]="10">10</option>
+        </select>
+    </div>
+    <!-- <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Firstname</th>
+                <th>Lastname</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>John</td>
+                <td>Doe</td>
+                <td>john@example.com</td>
+            </tr>
+            <tr>
+                <td>Mary</td>
+                <td>Moe</td>
+                <td>mary@example.com</td>
+            </tr>
+            <tr>
+                <td>July</td>
+                <td>Dooley</td>
+                <td>july@example.com</td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="row">
+        <div class="col-xs-12 col-12">
+            <pagination [boundaryLinks]="true" [totalItems]="77" previousText="&lsaquo;" nextText="&rsaquo;"
+                firstText="&laquo;" lastText="&raquo;">
+            </pagination>
+        </div>
+    </div> -->
+</div>

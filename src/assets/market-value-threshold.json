@@ -1,0 +1,67 @@
+{
+    "data": [
+        {
+            "MKT_VAL_FROM": 0,
+            "MKT_VAL_TO": 5000,
+            "VAR_THRESHOLD": 20,
+            "REPDEL_INCL": false,
+            "Client": "ServiceLink"
+        },
+        {
+            "MKT_VAL_FROM": 5001,
+            "MKT_VAL_TO": 10000,
+            "VAR_THRESHOLD": 5,
+            "REPDEL_INCL": false,
+            "Client": "ServiceLink"
+        },
+        {
+            "MKT_VAL_FROM": 10001,
+            "MKT_VAL_TO": 15000,
+            "VAR_THRESHOLD": 15,
+            "REPDEL_INCL": false,
+            "Client": "ServiceLink"
+        },
+        {
+            "MKT_VAL_FROM": 15001,
+            "MKT_VAL_TO": 20000,
+            "VAR_THRESHOLD": 7,
+            "REPDEL_INCL": false,
+            "Client": "ServiceLink"
+        },
+        {
+            "MKT_VAL_FROM": 20001,
+            "MKT_VAL_TO": 25000,
+            "VAR_THRESHOLD": 15,
+            "REPDEL_INCL": false,
+            "Client": "ServiceLink"
+        },
+        {
+            "MKT_VAL_FROM": 25001,
+            "MKT_VAL_TO": 30000,
+            "VAR_THRESHOLD": 9,
+            "REPDEL_INCL": false,
+            "Client": "ServiceLink"
+        },
+        {
+            "MKT_VAL_FROM": 30001,
+            "MKT_VAL_TO": 35000,
+            "VAR_THRESHOLD": 12,
+            "REPDEL_INCL": false,
+            "Client": "ServiceLink"
+        },
+        {
+            "MKT_VAL_FROM": 35001,
+            "MKT_VAL_TO": 40000,
+            "VAR_THRESHOLD": 10,
+            "REPDEL_INCL": false,
+            "Client": "ServiceLink"
+        },
+        {
+            "MKT_VAL_FROM": 40001,
+            "MKT_VAL_TO": 45000,
+            "VAR_THRESHOLD": 7,
+            "REPDEL_INCL": false,
+            "Client": "ServiceLink"
+        }
+    ]
+}

@@ -16,13 +16,15 @@ import { AppComponent } from "./app.component";
 import { HeaderComponent } from "./header/header.component";
 import { LoginLogoutButtonComponent } from "./login-logout-button.component";
 import { BingMapComponent } from "./bing-map/bing-map.component";
+import { MarketValueThresholdComponent } from './market-value-threshold/market-value-threshold.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     LoginLogoutButtonComponent,
-    BingMapComponent
+    BingMapComponent,
+    MarketValueThresholdComponent
   ],
   imports: [
     BrowserModule,
@@ -41,4 +43,4 @@ import { BingMapComponent } from "./bing-map/bing-map.component";
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

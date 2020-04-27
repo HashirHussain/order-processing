@@ -1,0 +1,4 @@
+.pagination, table > thead > tr {
+    background-color: #007bff;
+    color: #fff;
+}

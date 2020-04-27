@@ -10,6 +10,7 @@ import config from "./app.config";
 import { OrderDetailComponent } from "./order-processing/order-detail/order-detail.component";
 import { OrderListComponent } from "./order-processing/order-list/order-list.component";
 import { BingMapComponent } from "./bing-map/bing-map.component";
+import { MarketValueThresholdComponent } from './market-value-threshold/market-value-threshold.component';
 
 const routes: Routes = [
   {
@@ -29,6 +30,10 @@ const routes: Routes = [
   {
     path: "bing-map",
     component: BingMapComponent
+  },
+  {
+    path: "crud",
+    component: MarketValueThresholdComponent
   }
 ];
 
