@@ -7,6 +7,6 @@ export default {
     redirectUri: "http://localhost:4200/implicit/callback",
     scopes: ["openid", "profile", "email"],
     pkce: true,
-    baseApiUrl: 'https://servicelink-marketthresholdvalueservice.azurewebsites.net/'
+    baseApiUrl: 'https://tph-marketthresholdvalueservice.azurewebsites.net/'
   }
 };
