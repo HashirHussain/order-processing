@@ -19,8 +19,7 @@
     "@angular/platform-browser": "~8.2.14",
     "@angular/platform-browser-dynamic": "~8.2.14",
     "@angular/router": "~8.2.14",
-    "@ng-bootstrap/ng-bootstrap": "^2.0.0-alpha.0",
-    "@ng-bootstrap/schematics": "^2.0.0-alpha.1",
+    "@ng-bootstrap/ng-bootstrap": "5.3.1",
     "@ngrx/effects": "^9.1.0",
     "@ngrx/router-store": "^8.6.0",
     "@ngrx/store": "^8.6.0",
@@ -53,6 +52,6 @@
     "protractor": "~5.4.0",
     "ts-node": "~7.0.0",
     "tslint": "~5.15.0",
-    "typescript": "~3.5.3"
+    "typescript": "~3.5.0"
   }
 }

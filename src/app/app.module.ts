@@ -32,7 +32,7 @@ import { CoverSheetModule } from "./cover-sheet/cover-sheet.module";
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    NgbModule.forRoot(),
+    NgbModule,
     StoreModule.forRoot({}),
     EffectsModule.forRoot([]),
     StoreRouterConnectingModule.forRoot(),
