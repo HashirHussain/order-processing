@@ -17,7 +17,15 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "sl-charts": [
+        "dist/sl-charts"
+      ],
+      "sl-charts/*": [
+        "dist/sl-charts/*"
+      ]
+    }
   },
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,
