@@ -1,0 +1,50 @@
+* {
+  font-size: 12px;
+}
+.card-header {
+  background-color: rgba(0, 123, 255);
+  color: white;
+}
+
+.table-height {
+  overflow: scroll;
+  max-height: 300px;
+}
+
+th {
+  color: white;
+}
+.modal-header {
+  background-color: rgba(0, 123, 255);
+}
+.modal-title {
+  color: white;
+}
+.modal-backdrop {
+  background-color: transparent !important;
+}
+
+.no-record {
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+  color: #575b5f;
+  position: relative;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.table-tr {
+  cursor: pointer;
+}
+
+.table-tr:hover {
+  background-color: darkgrey;
+  /* font-weight: 600; */
+}
+
+.selected-row {
+  background-color: mediumslateblue;
+  color: white;
+  font-weight: 600;
+}

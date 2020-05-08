@@ -12,9 +12,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { AssignPopupComponent } from './modals/assign-popup/assign-popup.component';
 
 @NgModule({
-  declarations: [DashboardComponent, UserComponent, ManagerComponent],
+  declarations: [DashboardComponent, UserComponent, ManagerComponent, AssignPopupComponent],
   imports: [
     CommonModule,
     DashboardRoutingModule,
@@ -24,6 +25,9 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
     ReactiveFormsModule,
     FormsModule,
     InfiniteScrollModule
+  ],
+  entryComponents: [
+    AssignPopupComponent
   ]
 })
 export class DashboardModule { }

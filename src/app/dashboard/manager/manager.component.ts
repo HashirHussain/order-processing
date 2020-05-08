@@ -3,6 +3,7 @@ import { FormControl } from '@angular/forms';
 import { UsersService } from 'src/app/service/users.service';
 import { NgbModalRef, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
+import { AssignPopupComponent } from '../modals/assign-popup/assign-popup.component';
 
 interface users {
   userID: number;
@@ -39,13 +40,6 @@ export class ManagerComponent implements OnInit {
 
   // For Assign modal
   assignModalReference: NgbModalRef;
-  userSearch: string = '';
-  selectedAssignUser = {} as users;
-  isAssignLoading = false;
-  assignUsersList: users[] = [];
-  usersPage = 1;
-  usersPageSize = 10;
-  totalUsersRecords: number = 0;
 
   // For table
   page = 1;
@@ -166,82 +160,26 @@ export class ManagerComponent implements OnInit {
 
   // Assign Modal
 
-  openAssignModel(model) {
-    this.assignUsersList = [];
-    this.userSearch = '';
-    this.getUsersListForAssign();
-    this.assignModalReference = this.modalService.open(model, { ariaLabelledBy: 'modal-basic-title' });
-  }
+  openAssignModel() {
+    this.assignModalReference = this.modalService.open(AssignPopupComponent, {});
 
-  getUsersListForAssign() {
-    this.isAssignLoading = true;
-    // const payload = `page=${this.usersPage}&pageSize=${this.usersPageSize}`;
-    let payload = `page=${this.usersPage}&pageSize=${this.usersPageSize}`;
-    if (this.userSearch && this.userSearch.length > 3) {
-      payload = payload + `&userName=${this.userSearch}`;
-    }
-    this.dashboardService.getUsersListWithPagination(payload).subscribe({
-      next: result => {
-        if (result['items'] && result['items'].length) {
-          this.addUsersToAssignUsersList(result['items']);
-          this.totalUsersRecords = result['totalrows'] ? result['totalrows'] : 0;
-        } else {
-          this.isAssignLoading = false;
-        }
-      },
-      error: error => this.toastr.error('Server Error', 'Error')
-    });
-  }
-
-  getUsersByUserName() {
-    if (this.userSearch && this.userSearch.length > 3) {
-      this.resetUsersList();
-      this.getUsersListForAssign();
-    }
-  }
-
-  addUsersToAssignUsersList(data) {
-    data.forEach((item, index) => {
-      this.assignUsersList.push(item);
-      if (index === (data.length - 1)) {
-        this.isAssignLoading = false;
+    this.assignModalReference.componentInstance.response.subscribe(res => {
+      console.log(res);
+      if (res.success) {
+        this.onAssign(res['data']);
+      } else {
+        this.assignModalReference.close();
       }
     });
   }
 
-  onUserTableScroll() {
-    this.usersPage++;
-    this.getUsersListForAssign();
-  }
-
-  resetUsersList() {
-    this.usersPage = 1;
-    this.usersPageSize = 10;
-    this.totalUsersRecords = 0;
-    this.assignUsersList = [];
-  }
-
-  closeAssignModel() {
-    this.assignModalReference.close();
-    this.selectedAssignUser = {} as users;
-    this.resetUsersList();
-  }
-
-  onSelectUser(user: users) {
-    this.selectedAssignUser = {} as users;
-    this.selectedAssignUser = user;
-  }
-
-  onAssign() {
+  onAssign(selectedAssignUser) {
     let taskTrackingIds = Object.keys(this.checked);
 
     let requestObj = {
       taskTrackingIds: taskTrackingIds.join(','),
-      userId: this.selectedAssignUser.userID
+      userId: selectedAssignUser.userID
     }
-
-    console.log(requestObj);
-
 
     this.dashboardService.assignUser(requestObj).subscribe(res => {
       this.toastr.success('User Assigned Successfully', 'Success');

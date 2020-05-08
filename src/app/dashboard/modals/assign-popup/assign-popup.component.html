@@ -1,0 +1,66 @@
+<div class="modal-header">
+  <h4 class="modal-title" id="modal-basic-title">Assign an User or a Team</h4>
+  <button type="button" class="close" aria-label="Close" (click)="closeAssignModel()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div class="d-flex mb-3">
+    <div class="form-check-inline col-md-4">
+      <label class="form-check-label">
+        <input type="radio" class="form-check-input" name="assignUserOrTeam" checked>USER
+      </label>
+    </div>
+    <div class="form-check-inline col-md-4">
+      <label class="form-check-label">
+        <input type="radio" class="form-check-input" name="assignUserOrTeam">TEAM
+      </label>
+    </div>
+  </div>
+
+  <div class="d-flex mb-3 align-items-center">
+    <label class="m-0 pr-3" for="searchName">NAME:</label>
+    <div class="col-md-8">
+      <input class="form-control" id="searchName" type="text" placeholder="Search Name..." name='userSearch'
+        [(ngModel)]="userSearch" (keyup)="getUsersByUserName()">
+    </div>
+  </div>
+
+  <div class="card mb-3 mt-2">
+    <table class="table table-bordered table-responsive mb-0 table-height" infiniteScroll [infiniteScrollDistance]="1"
+      (scrolled)="onUserTableScroll()" [scrollWindow]="false">
+      <div class="text-nowrap">
+        <thead class="bg-primary text-white">
+          <tr>
+            <th scope="col" class='col-md-3'>User ID</th>
+            <th scope="col" class='col-md-3'>User Name</th>
+            <th scope="col" class='col-md-3'>Email ID</th>
+            <th scope="col" class='col-md-3'>Phone</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- <td *ngIf="!tasksList.length" style="text-align:center" colspan="15">No records found</td> -->
+          <tr *ngFor="let user of assignUsersList" class='table-tr'
+            [ngClass]="{ 'selected-row' : user.userID == selectedAssignUser.userID }" (click)='onSelectUser(user)'>
+            <td scope="col" class='col-md-3'>{{ user.userID }}</td>
+            <td scope="col" class='col-md-3'>{{ user.userName}}</td>
+            <td scope="col" class='col-md-3'>{{ user.emailID }} </td>
+            <td scope="col" class='col-md-3'>{{ user.phone }} </td>
+          </tr>
+          <tr *ngIf="!isAssignLoading && totalRecords===0">
+            <td colspan="10" class="no-record">No records found</td>
+          </tr>
+          <tr *ngIf="isAssignLoading">
+            <td colspan="10" class="no-record">Loading . . .</td>
+          </tr>
+        </tbody>
+      </div>
+    </table>
+  </div>
+
+  <div class="d-flex justify-content-center">
+    <button type="button" class="btn-sm btn btn-dark mr-2" (click)='onAssign()'
+      [disabled]='!selectedAssignUser.userID'>Assign</button>
+    <button type="button" class="btn-sm btn btn-dark " (click)="closeAssignModel()">Cancel</button>
+  </div>
+</div>
