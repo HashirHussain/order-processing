@@ -7,6 +7,8 @@ import { Subscription } from 'rxjs';
 interface users {
   userID: number;
   userName: string;
+  emailID: string;
+  phone: number;
 }
 
 @Component({
@@ -35,12 +37,16 @@ export class AssignPopupComponent implements OnInit, OnDestroy {
 
   getUsersListForAssign() {
     this.isAssignLoading = true;
-    const payload = `page=${this.page}&pageSize=${this.pageSize}`;
+    // const payload = `page=${this.page}&pageSize=${this.pageSize}`;
+    let payload = `page=${this.page}&pageSize=${this.pageSize}`;
+    if (this.userSearch && this.userSearch.length > 3) {
+      payload = payload + `&userName=${this.userSearch}`;
+    }
     this.subscription = this.dashboardService.getUsersListWithPagination(payload).subscribe({
       next: result => {
         if (result['items'] && result['items'].length) {
           this.addUsersToAssignUsersList(result['items']);
-          this.totalUsersRecords = result['totalrows'];
+          this.totalUsersRecords = result['totalrows'] ? result['totalrows'] : 0;
         } else {
           this.isAssignLoading = false;
         }

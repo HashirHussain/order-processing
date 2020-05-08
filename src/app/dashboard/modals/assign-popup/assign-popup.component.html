@@ -21,7 +21,7 @@
   <div class="d-flex mb-3 align-items-center">
     <label class="m-0 pr-3" for="searchName">NAME:</label>
     <div class="col-md-8">
-      <input class="form-control" id="searchName" type="text" placeholder="Search Name..." name='userSearch'
+      <input class="form-control" autocomplete="off" id="searchName" type="text" placeholder="Search Name..." name='userSearch'
         [(ngModel)]="userSearch" (keyup)="getUsersByUserName()">
     </div>
   </div>
@@ -47,7 +47,7 @@
             <td scope="col" class='col-md-3'>{{ user.emailID }} </td>
             <td scope="col" class='col-md-3'>{{ user.phone }} </td>
           </tr>
-          <tr *ngIf="!isAssignLoading && totalRecords===0">
+          <tr *ngIf="!isAssignLoading && assignUsersList.length===0">
             <td colspan="10" class="no-record">No records found</td>
           </tr>
           <tr *ngIf="isAssignLoading">
