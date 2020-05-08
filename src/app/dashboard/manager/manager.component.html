@@ -70,7 +70,7 @@
               <td scope="col">{{ dashboardTasks.orderNumber}}</td>
               <td scope="col">{{ dashboardTasks.loanNumber }} </td>
               <td scope="col">{{ dashboardTasks.transactionType }} </td>
-              <td scope="col">{{ dashboardTasks.lenderName }} </td>
+              <td scope="col">{{ dashboardTasks.lender }} </td>
               <td scope="col">{{ dashboardTasks.submitted }} </td>
               <td scope="col">{{ dashboardTasks.age }} </td>
               <td scope="col">{{ dashboardTasks.clientduedate }} </td>
@@ -107,7 +107,7 @@
     <div class="d-flex mb-3">
       <div class="form-check-inline col-md-4">
         <label class="form-check-label">
-          <input type="radio" class="form-check-input" name="assignUserOrTeam">USER
+          <input type="radio" class="form-check-input" name="assignUserOrTeam" checked>USER
         </label>
       </div>
       <div class="form-check-inline col-md-4">
@@ -125,24 +125,24 @@
     </div>
 
     <div class="card mb-3 mt-2">
-      <table class="table table-bordered table-responsive mb-0 table-height" infiniteScroll [infiniteScrollDistance]="3"
-        [infiniteScrollUpDistance]="1.5" (scrolled)="onScroll()" (scrolledUp)="onScrollUp()" [scrollWindow]="false">
+      <table class="table table-bordered table-responsive mb-0 table-height">
         <div class="text-nowrap">
           <thead class="bg-primary text-white">
             <tr>
-              <th scope="col" class='col-md-3'>Name</th>
-              <th scope="col" class='col-md-3'>Daily Goal</th>
-              <th scope="col" class='col-md-3'>Daily Schedule</th>
-              <th scope="col" class='col-md-3'>Exceptions</th>
+              <th scope="col" class='col-md-3'>User ID</th>
+              <th scope="col" class='col-md-3'>User Name</th>
+              <th scope="col" class='col-md-3'>Email ID</th>
+              <th scope="col" class='col-md-3'>Phone</th>
             </tr>
           </thead>
           <tbody>
             <!-- <td *ngIf="!tasksList.length" style="text-align:center" colspan="15">No records found</td> -->
-            <tr *ngFor="let dashboardTasks of tasksList">
-              <td scope="col" class='col-md-3'>{{ dashboardTasks.taskName }}</td>
-              <td scope="col" class='col-md-3'>{{ dashboardTasks.orderNumber}}</td>
-              <td scope="col" class='col-md-3'>{{ dashboardTasks.loanNumber }} </td>
-              <td scope="col" class='col-md-3'>{{ dashboardTasks.transactionType }} </td>
+            <tr *ngFor="let user of assignUsersList" class='table-tr'
+              [ngClass]="{ 'selected-row' : user.userID == selectedAssignUser.userID }" (click)='onSelectUser(user)'>
+              <td scope="col" class='col-md-3'>{{ user.userID }}</td>
+              <td scope="col" class='col-md-3'>{{ user.userName}}</td>
+              <td scope="col" class='col-md-3'>{{ user.emailID }} </td>
+              <td scope="col" class='col-md-3'>{{ user.phone }} </td>
             </tr>
             <tr *ngIf="!isLoading && totalRecords===0">
               <td colspan="10" class="no-record">No records found</td>
@@ -156,7 +156,8 @@
     </div>
 
     <div class="d-flex justify-content-center">
-      <button type="button" class="btn-sm btn btn-dark mr-2" (click)='onAssign()'>Assign</button>
+      <button type="button" class="btn-sm btn btn-dark mr-2" (click)='onAssign()'
+        [disabled]='!selectedAssignUser.userID'>Assign</button>
       <button type="button" class="btn-sm btn btn-dark " (click)="closeAssignModel()">Cancel</button>
     </div>
   </div>

@@ -16,6 +16,10 @@ export class UsersService {
     return this.http.get('https://tph-usersservice.azurewebsites.net/api/users/search?userName=' + searchUser)
   }
 
+  getUsersListWithPagination(payload) {
+    return this.http.get('https://tph-usersservice.azurewebsites.net/api/users?' + payload);
+  }
+
   /**
    * @description Service method to get Task List
    * @author Krunal Shriram Sakharkar
@@ -30,5 +34,11 @@ export class UsersService {
     // return this._http.get('api/v1/userdashboard/tasktrackings?' + payload)
   }
 
+  getManagerTasksList(payload) {
+    return this.http.get('https://tph-managerdashboard-tasktrackingservice.azurewebsites.net/api/v1/managerdashboard/tasktrackings?' + payload)
+  }
 
+  assignUser(request) {
+    return this.http.put('https://tph-managerdashboard-tasktrackingservice.azurewebsites.net/api/v1/managerdashboard/tasktrackings/assignuser', request);
+  }
 }

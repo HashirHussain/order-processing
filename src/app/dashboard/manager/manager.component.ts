@@ -5,7 +5,7 @@ import { NgbModalRef, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 
 interface users {
-  userId: number;
+  userID: number;
   userName: string;
 }
 interface selected {
@@ -14,7 +14,7 @@ interface selected {
   orderNumber: string;
   loanNumber: string;
   transactionType: string;
-  lenderName: string;
+  lender: string;
   submitted: string;
   age: string;
   clientduedate: string;
@@ -40,6 +40,9 @@ export class ManagerComponent implements OnInit {
   // For Assign modal
   assignModalReference: NgbModalRef;
   searchUser: FormControl = new FormControl();
+  selectedAssignUser = {} as users;
+  isAssignLoading = false;
+  assignUsersList: users[] = [];
 
   // For table
   page = 1;
@@ -87,7 +90,7 @@ export class ManagerComponent implements OnInit {
     if (this.selectedUser && this.selectedUser['userID']) {
       this.isLoading = true;
       const payload = `userId=${this.selectedUser['userID']}&page=${this.page}&pageSize=${this.pageSize}`;
-      this.dashboardService.getTasksList(payload).subscribe({
+      this.dashboardService.getManagerTasksList(payload).subscribe({
         next: result => {
           // console.log('result', result);
           if (result['items'] && result['items'].length) {
@@ -132,16 +135,10 @@ export class ManagerComponent implements OnInit {
   }
 
   isCheckedAllRow() {
-    let count = 0;
+    let keys = Object.keys(this.checked);
 
-    for (let key of Object.keys(this.checked)) {
-      if (this.checked[key]) {
-        count++;
-      }
-    }
-
-    this.isCheckedAll = count == this.tasksList.length ? true : false;
-    this.isAssignButton = count > 0 ? true : false;
+    this.isCheckedAll = keys.length == this.tasksList.length ? true : false;
+    this.isAssignButton = keys.length > 0 ? true : false;
   }
 
   checkAll(selectedItem: selected[], check: HTMLInputElement) {
@@ -158,21 +155,72 @@ export class ManagerComponent implements OnInit {
     if (check.checked == true) {
       this.checked[selectedItem.taskTrackingId] = true;
     } else if (check.checked == false) {
-      this.checked[selectedItem.taskTrackingId] = false;
+      delete this.checked[selectedItem.taskTrackingId];
     }
 
     this.isCheckedAllRow();
   }
 
+  // Assign Modal
+
   openAssignModel(model) {
     this.assignModalReference = this.modalService.open(model, { ariaLabelledBy: 'modal-basic-title' });
+    this.getUsersListForAssign();
+  }
+
+  getUsersListForAssign() {
+    this.isAssignLoading = true;
+    this.assignUsersList = [];
+    const payload = `page=${this.page}&pageSize=${this.pageSize}`;
+    this.dashboardService.getUsersListWithPagination(payload).subscribe({
+      next: result => {
+        if (result['items'] && result['items'].length) {
+          this.addUsersToAssignUsersList(result['items']);
+          // this.totalRecords = result['totalrows'];
+        } else {
+          this.isAssignLoading = false;
+        }
+      },
+      error: error => this.toastr.error('Server Error', 'Error')
+    });
+  }
+
+
+  addUsersToAssignUsersList(data) {
+    data.forEach((item, index) => {
+      this.assignUsersList.push(item);
+      if (index === (data.length - 1)) {
+        this.isAssignLoading = false;
+      }
+    });
   }
 
   closeAssignModel() {
     this.assignModalReference.close();
+    this.selectedAssignUser = {} as users;
+  }
+
+  onSelectUser(user: users) {
+    this.selectedAssignUser = {} as users;
+    this.selectedAssignUser = user;
   }
 
   onAssign() {
+    let taskTrackingIds = Object.keys(this.checked);
 
+    let requestObj = {
+      taskTrackingIds: taskTrackingIds.join(','),
+      userId: this.selectedAssignUser.userID
+    }
+
+    console.log(requestObj);
+
+
+    this.dashboardService.assignUser(requestObj).subscribe(res => {
+      this.toastr.success('User Assigned Successfully', 'Success');
+      this.assignModalReference.close();
+    }, error => {
+      this.toastr.error(error.error, 'Error');
+    });
   }
 }

@@ -37,3 +37,18 @@ th {
   padding-top: 20px;
   padding-bottom: 20px;
 }
+
+.table-tr {
+  cursor: pointer;
+}
+
+.table-tr:hover {
+  background-color: darkgrey;
+  /* font-weight: 600; */
+}
+
+.selected-row {
+  background-color: mediumslateblue;
+  color: white;
+  font-weight: 600;
+}
