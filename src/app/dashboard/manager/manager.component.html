@@ -125,7 +125,8 @@
     </div>
 
     <div class="card mb-3 mt-2">
-      <table class="table table-bordered table-responsive mb-0 table-height">
+      <table class="table table-bordered table-responsive mb-0 table-height" infiniteScroll [infiniteScrollDistance]="1"
+        (scrolled)="onUserTableScroll()" [scrollWindow]="false">
         <div class="text-nowrap">
           <thead class="bg-primary text-white">
             <tr>
@@ -144,10 +145,10 @@
               <td scope="col" class='col-md-3'>{{ user.emailID }} </td>
               <td scope="col" class='col-md-3'>{{ user.phone }} </td>
             </tr>
-            <tr *ngIf="!isLoading && totalRecords===0">
+            <tr *ngIf="!isAssignLoading && totalRecords===0">
               <td colspan="10" class="no-record">No records found</td>
             </tr>
-            <tr *ngIf="isLoading">
+            <tr *ngIf="isAssignLoading">
               <td colspan="10" class="no-record">Loading . . .</td>
             </tr>
           </tbody>

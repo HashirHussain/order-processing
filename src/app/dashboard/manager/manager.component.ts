@@ -43,6 +43,9 @@ export class ManagerComponent implements OnInit {
   selectedAssignUser = {} as users;
   isAssignLoading = false;
   assignUsersList: users[] = [];
+  usersPage = 1;
+  usersPageSize = 10;
+  totalUsersRecords: number = 0;
 
   // For table
   page = 1;
@@ -165,18 +168,18 @@ export class ManagerComponent implements OnInit {
 
   openAssignModel(model) {
     this.assignModalReference = this.modalService.open(model, { ariaLabelledBy: 'modal-basic-title' });
+    this.assignUsersList = [];
     this.getUsersListForAssign();
   }
 
   getUsersListForAssign() {
     this.isAssignLoading = true;
-    this.assignUsersList = [];
-    const payload = `page=${this.page}&pageSize=${this.pageSize}`;
+    const payload = `page=${this.usersPage}&pageSize=${this.usersPageSize}`;
     this.dashboardService.getUsersListWithPagination(payload).subscribe({
       next: result => {
         if (result['items'] && result['items'].length) {
           this.addUsersToAssignUsersList(result['items']);
-          // this.totalRecords = result['totalrows'];
+          this.totalUsersRecords = result['totalrows'];
         } else {
           this.isAssignLoading = false;
         }
@@ -195,9 +198,22 @@ export class ManagerComponent implements OnInit {
     });
   }
 
+  onUserTableScroll() {
+    this.usersPage++;
+    this.getUsersListForAssign();
+  }
+
+  resetUsersList() {
+    this.usersPage = 1;
+    this.usersPageSize = 10;
+    this.totalUsersRecords = 0;
+    this.assignUsersList = [];
+  }
+
   closeAssignModel() {
     this.assignModalReference.close();
     this.selectedAssignUser = {} as users;
+    this.resetUsersList();
   }
 
   onSelectUser(user: users) {
