@@ -21,8 +21,7 @@
           <button type="button" class="btn-sm btn btn-primary pl-3 pr-3 pb-2 pt-2">Layout</button>
         </div>
         <div>
-          <button type="button" class="btn-sm btn btn-primary pl-3 pr-3 pb-2 pt-2" (click)="openAssignModel(assignModal)">Assign</button>
-          <!-- [disabled]="!isAssignButton" -->
+          <button type="button" class="btn-sm btn btn-primary pl-3 pr-3 pb-2 pt-2" [disabled]="!isAssignButton" (click)="openAssignModel(assignModal)">Assign</button>
         </div>
       </div>
     </div>
