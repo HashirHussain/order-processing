@@ -19,10 +19,11 @@ export class UserComponent implements OnInit {
   pageSize = 10;
   totalRecords: number = 0;
   selectedUser: object;
-
   isLoading = false;
-
   userSearch: string = '';
+  _orderNumberSearch: boolean;
+  orderNumberSearch: string = '';
+  loanNumberSearch: string = '';
 
   userListTotal: users[] = [];
   userList: users[] = [];
@@ -30,29 +31,7 @@ export class UserComponent implements OnInit {
   private _searchTerm: string;
   tasksList: any[];
   isTextBoxVisible: boolean = false;
-  get searchTerm(): string {
-    return this._searchTerm;
-  }
-  set searchTerm(value: string) {
-    this._searchTerm = value;
-    this.tasksList = this.filterByTaskName(value);
-  }
-  private _searchTermByOrderNumber: string;
-  get searchTermByOrderNumber(): string {
-    return this._searchTermByOrderNumber;
-  }
-  set searchTermByOrderNumber(value: string) {
-    this._searchTermByOrderNumber = value;
-    this.tasksList = this.filterByOrderNumber(value);
-  }
-  private _searchTermByLoanNumber: string;
-  get searchTermByLoanNumber(): string {
-    return this._searchTermByLoanNumber;
-  }
-  set searchTermByLoanNumber(value: string) {
-    this._searchTermByLoanNumber = value;
-    this.tasksList = this.filterByLoanNumber(value);
-  }
+
   taskDetails: any[] = [];
 
   pieChart: object = {
@@ -123,30 +102,7 @@ export class UserComponent implements OnInit {
   toggle() {
     this.isTextBoxVisible = !this.isTextBoxVisible;
   }
-  filterByTaskName(searchString: string): any[] {
-    return this.taskDetails.filter(taskDetail =>
-      taskDetail.taskName.toLowerCase().indexOf(searchString.toLowerCase()) !== -1);
-  }
-  filterByOrderNumber(searchString: string): any[] {
-    return this.taskDetails.filter(taskDetail =>
-      taskDetail.orderNumber.toLowerCase().indexOf(searchString.toLowerCase()) !== -1);
-  }
-  filterByLoanNumber(searchString: string): any[] {
-    return this.taskDetails.filter(taskDetail =>
-      taskDetail.loanNumber.toLowerCase().indexOf(searchString.toLowerCase()) !== -1);
-  }
-  /*getUsersList($event) {
-    console.log("called");
-    let userName = (<HTMLInputElement>document.getElementById('userIdFirstWay')).value;
-    console.log(userName);
 
-    if (userName.length > 3) {
-      console.log(userName.length);
-        this.userList.getUsersList(userName).subscribe(data=>{
-          this.userList=data.items;
-      });
-    }
-    }*/
 
   constructor(private _userService: UsersService, private toastr: ToastrService) { }
 
@@ -168,8 +124,10 @@ export class UserComponent implements OnInit {
     if (this.userList.length) {
       this.selectedUser = this.userList.find(f => f.userName === value);
       this.resetList();
+      this.orderNumberSearch = '';
       this.getTasksList();
     }
+    console.log('this.selectedUser', this.selectedUser);
     if (!this.selectedUser) {
       this.userList = [];
       if (value.length > 3) {
@@ -189,7 +147,11 @@ export class UserComponent implements OnInit {
   getTasksList() {
     if (this.selectedUser && this.selectedUser['userID']) {
       this.isLoading = true;
-      const payload = `userId=${this.selectedUser['userID']}&page=${this.page}&pageSize=${this.pageSize}`;
+      let payload = `userId=${this.selectedUser['userID']}&page=${this.page}&pageSize=${this.pageSize}`;
+      if (this.orderNumberSearch && this.orderNumberSearch.length > 3) {
+        payload = payload + `&orderNumber=${this.orderNumberSearch}`;
+      }
+      // const payload = `userId=${this.selectedUser['userID']}&page=${this.page}&pageSize=${this.pageSize}`;
       this._userService.getTasksList(payload).subscribe({
         next: result => {
           // console.log('result', result);
@@ -202,6 +164,13 @@ export class UserComponent implements OnInit {
         },
         error: error => this.toastr.error('Server Error', 'Error')
       });
+    }
+  }
+
+  getTasksByorderNumberSearch() {
+    if (this.orderNumberSearch.length > 3) {
+      this.resetList();
+      this.getTasksList();
     }
   }
 

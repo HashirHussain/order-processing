@@ -25,7 +25,8 @@ export class UsersService {
    * @memberof UsersService
    */
   getTasksList(payload) {
-    return this.http.get('https://tph-userdashboard-tasktrackingservice.azurewebsites.net/api/v1/userdashboard/tasktrackings?' + payload)
+    console.log('payload', payload);
+    return this.http.get('https://tph-userdashboard-tasktrackingservice.azurewebsites.net/api/v1/userdashboard/tasktrackings?' + payload);
     // return this._http.get('api/v1/userdashboard/tasktrackings?' + payload)
   }
 

@@ -1,7 +1,7 @@
 <div class="d-flex justify-content-end align-items-center">
   <label class='m-0'>Select User</label>
   <div class="col-md-4 pr-0">
-    <input type="text" placeholder="Search User Here" (keyup)="getUsersList(userSearch)" name="userSearch"
+    <input type="text" autocomplete="off" placeholder="Search User Here" (keyup)="getUsersList(userSearch)" name="userSearch"
       [(ngModel)]="userSearch" list="user" class="form-control">
     <datalist id="user">
       <option *ngFor="let item of userList" [value]="item.userName">{{item.userName}}</option>
@@ -54,20 +54,21 @@
 </div>
 <hr />
 
-<div class="form-group row mt-3">
+<!-- <div class="form-group row mt-3">
   <div class="col-md-6 d-flex align-items-center">
     <label class="col-md-6 m-0" for="order">Filter By Order number:</label>
     <div class="col-md-6">
-      <input class="form-control" id="order" type="text" placeholder="Enter order number" [(ngModel)]="searchTermByOrderNumber">
+      <input autocomplete="off" class="form-control" id="order" type="text" placeholder="Enter order number"
+        (keyup)="getTasksByorderNumberSearch()" name="orderNumberSearch" [(ngModel)]="orderNumberSearch">
     </div>
   </div>
   <div class="col-md-6 d-flex align-items-center">
     <label class="col-md-6 m-0" for="loan">Filter By Loan number:</label>
     <div class="col-md-6">
-      <input class="form-control" id="loan" type="text" placeholder="Enter loan number" [(ngModel)]="searchTermByLoanNumber">
+      <input autocomplete="off" class="form-control" id="loan" type="text" placeholder="Enter loan number" [(ngModel)]="loanNumberSearch">
     </div>
   </div>
-</div>
+</div> -->
 <div class="card mb-4 mt-2">
   <div class="card-header bg-primary text-white">
     Drag a column header and drop it hear to group by that column
@@ -78,7 +79,10 @@
       <thead class="bg-primary text-white">
         <tr>
           <th scope="col">Task Name <i class="fa fa-filter"></i></th>
-          <th scope="col">Order Number <i class="fa fa-filter"></i></th>
+          <th scope="col">Order Number <i class="fa fa-filter" style="cursor:pointer;" (click)="_orderNumberSearch=!_orderNumberSearch"></i>
+            <input autocomplete="off" class="form-control" *ngIf="_orderNumberSearch" type="text" placeholder="Enter order number"
+              (keyup)="getTasksByorderNumberSearch()" name="orderNumberSearch" [(ngModel)]="orderNumberSearch">
+          </th>
           <th scope="col">Loan Number <i class="fa fa-filter"></i></th>
           <th scope="col">Transaction type <i class="fa fa-filter"></i></th>
           <th scope="col">Lender Name <i class="fa fa-filter"></i></th>
@@ -94,7 +98,7 @@
           <th scope="col">Due Date</th>
         </tr>
       </thead>
-      <tbody >
+      <tbody>
         <!-- <td *ngIf="!tasksList.length" style="text-align:center" colspan="15">No records found</td> -->
         <tr *ngFor="let task of tasksList">
           <td scope="col"><span *ngIf="task.taskName; else dash" title="{{task.taskName}}">{{ task.taskName }}</span>
