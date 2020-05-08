@@ -7,8 +7,7 @@
         <datalist id="user">
           <option *ngFor="let item of usersList" [value]="item.userName">{{item.userName}}</option>
         </datalist> -->
-        <input type="text" placeholder="Search User Here" (keyup)="getUsersList(userSearch)" name="userSearch"
-          [(ngModel)]="userSearch" list="user" class="form-control">
+        <input type="text" placeholder="Search User Here" (keyup)="getUsersList(userSearch)" name="userSearch" [(ngModel)]="userSearch" list="user" class="form-control">
         <datalist id="user">
           <option *ngFor="let item of usersList" [value]="item.userName">{{item.userName}}</option>
         </datalist>
@@ -22,8 +21,8 @@
           <button type="button" class="btn-sm btn btn-primary pl-3 pr-3 pb-2 pt-2">Layout</button>
         </div>
         <div>
-          <button type="button" class="btn-sm btn btn-primary pl-3 pr-3 pb-2 pt-2"
-            (click)="openAssignModel(assignModal)" [disabled]="!isAssignButton">Assign</button>
+          <button type="button" class="btn-sm btn btn-primary pl-3 pr-3 pb-2 pt-2" (click)="openAssignModel(assignModal)">Assign</button>
+          <!-- [disabled]="!isAssignButton" -->
         </div>
       </div>
     </div>
@@ -31,14 +30,12 @@
       <div class="card-header bg-primary text-white">
         Drag a column header and drop it hear to group by that column
       </div>
-      <table class="table table-bordered table-responsive mb-0 table-height" infiniteScroll [infiniteScrollDistance]="3"
-        [infiniteScrollUpDistance]="1.5" (scrolled)="onScroll()" (scrolledUp)="onScrollUp()" [scrollWindow]="false">
+      <table class="table table-bordered table-responsive mb-0 table-height" infiniteScroll [infiniteScrollDistance]="3" [infiniteScrollUpDistance]="1.5" (scrolled)="onScroll()" (scrolledUp)="onScrollUp()" [scrollWindow]="false">
         <div class="text-nowrap">
           <thead class="bg-primary text-white">
             <tr>
               <th scope="col">
-                <input #checkall type="checkbox" [checked]="isCheckedAll" class="form-check-input m-0" value=""
-                  (click)="checkAll(tasksList, checkall)" [disabled]='!tasksList.length'>
+                <input #checkall type="checkbox" [checked]="isCheckedAll" class="form-check-input m-0" value="" (click)="checkAll(tasksList, checkall)" [disabled]='!tasksList.length'>
               </th>
               <th scope="col"></th>
               <th scope="col">Task Name <i class="fa fa-filter"></i></th>
@@ -62,8 +59,7 @@
             <!-- <td *ngIf="!tasksList.length" style="text-align:center" colspan="15">No records found</td> -->
             <tr *ngFor="let dashboardTasks of tasksList;let i=index">
               <td scope="col">
-                <input #check type="checkbox" class="form-check-input m-0" value=""
-                  [checked]="checked[dashboardTasks.taskTrackingId]" (click)="checkedItem(dashboardTasks,check,i)">
+                <input #check type="checkbox" class="form-check-input m-0" value="" [checked]="checked[dashboardTasks.taskTrackingId]" (click)="checkedItem(dashboardTasks,check,i)">
               </td>
               <td scope="col"><i class="fa fa-lock"></i></td>
               <td scope="col">{{ dashboardTasks.taskName }}</td>
@@ -120,13 +116,12 @@
     <div class="d-flex mb-3 align-items-center">
       <label class="m-0 pr-3" for="searchName">NAME:</label>
       <div class="col-md-8">
-        <input class="form-control" id="searchName" type="text" placeholder="Search Name..." [formControl]='searchUser'>
+        <input class="form-control" id="searchName" type="text" placeholder="Search Name..." name='userSearch' [(ngModel)]="userSearch" (keyup)="getUsersByUserName()">
       </div>
     </div>
 
     <div class="card mb-3 mt-2">
-      <table class="table table-bordered table-responsive mb-0 table-height" infiniteScroll [infiniteScrollDistance]="1"
-        (scrolled)="onUserTableScroll()" [scrollWindow]="false">
+      <table class="table table-bordered table-responsive mb-0 table-height" infiniteScroll [infiniteScrollDistance]="1" (scrolled)="onUserTableScroll()" [scrollWindow]="false">
         <div class="text-nowrap">
           <thead class="bg-primary text-white">
             <tr>
@@ -138,15 +133,14 @@
           </thead>
           <tbody>
             <!-- <td *ngIf="!tasksList.length" style="text-align:center" colspan="15">No records found</td> -->
-            <tr *ngFor="let user of assignUsersList" class='table-tr'
-              [ngClass]="{ 'selected-row' : user.userID == selectedAssignUser.userID }" (click)='onSelectUser(user)'>
+            <tr *ngFor="let user of assignUsersList" class='table-tr' [ngClass]="{ 'selected-row' : user.userID == selectedAssignUser.userID }" (click)='onSelectUser(user)'>
               <td scope="col" class='col-md-3'>{{ user.userID }}</td>
               <td scope="col" class='col-md-3'>{{ user.userName}}</td>
               <td scope="col" class='col-md-3'>{{ user.emailID }} </td>
               <td scope="col" class='col-md-3'>{{ user.phone }} </td>
             </tr>
-            <tr *ngIf="!isAssignLoading && totalRecords===0">
-              <td colspan="10" class="no-record">No records found</td>
+            <tr *ngIf="!isAssignLoading && assignUsersList.length==0">
+              <td colspan="10" class="no-record">{{totalUsersRecords}}- - {{isAssignLoading}}No records found</td>
             </tr>
             <tr *ngIf="isAssignLoading">
               <td colspan="10" class="no-record">Loading . . .</td>
@@ -157,8 +151,7 @@
     </div>
 
     <div class="d-flex justify-content-center">
-      <button type="button" class="btn-sm btn btn-dark mr-2" (click)='onAssign()'
-        [disabled]='!selectedAssignUser.userID'>Assign</button>
+      <button type="button" class="btn-sm btn btn-dark mr-2" (click)='onAssign()' [disabled]='!selectedAssignUser.userID'>Assign</button>
       <button type="button" class="btn-sm btn btn-dark " (click)="closeAssignModel()">Cancel</button>
     </div>
   </div>

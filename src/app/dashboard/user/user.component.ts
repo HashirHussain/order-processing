@@ -127,7 +127,6 @@ export class UserComponent implements OnInit {
       this.orderNumberSearch = '';
       this.getTasksList();
     }
-    console.log('this.selectedUser', this.selectedUser);
     if (!this.selectedUser) {
       this.userList = [];
       if (value.length > 3) {
@@ -167,6 +166,12 @@ export class UserComponent implements OnInit {
     }
   }
 
+  /**
+   * @description Method to Search Task by Order Number
+   * @author Krunal Shriram Sakharkar
+   * @date 2020-05-08
+   * @memberof UserComponent
+   */
   getTasksByorderNumberSearch() {
     if (this.orderNumberSearch.length > 3) {
       this.resetList();

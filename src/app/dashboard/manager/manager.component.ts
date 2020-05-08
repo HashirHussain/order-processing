@@ -39,7 +39,7 @@ export class ManagerComponent implements OnInit {
 
   // For Assign modal
   assignModalReference: NgbModalRef;
-  searchUser: FormControl = new FormControl();
+  userSearch: string = '';
   selectedAssignUser = {} as users;
   isAssignLoading = false;
   assignUsersList: users[] = [];
@@ -167,19 +167,24 @@ export class ManagerComponent implements OnInit {
   // Assign Modal
 
   openAssignModel(model) {
-    this.assignModalReference = this.modalService.open(model, { ariaLabelledBy: 'modal-basic-title' });
     this.assignUsersList = [];
+    this.userSearch = '';
     this.getUsersListForAssign();
+    this.assignModalReference = this.modalService.open(model, { ariaLabelledBy: 'modal-basic-title' });
   }
 
   getUsersListForAssign() {
     this.isAssignLoading = true;
-    const payload = `page=${this.usersPage}&pageSize=${this.usersPageSize}`;
+    // const payload = `page=${this.usersPage}&pageSize=${this.usersPageSize}`;
+    let payload = `page=${this.usersPage}&pageSize=${this.usersPageSize}`;
+    if (this.userSearch && this.userSearch.length > 3) {
+      payload = payload + `&userName=${this.userSearch}`;
+    }
     this.dashboardService.getUsersListWithPagination(payload).subscribe({
       next: result => {
         if (result['items'] && result['items'].length) {
           this.addUsersToAssignUsersList(result['items']);
-          this.totalUsersRecords = result['totalrows'];
+          this.totalUsersRecords = result['totalrows'] ? result['totalrows'] : 0;
         } else {
           this.isAssignLoading = false;
         }
@@ -188,6 +193,12 @@ export class ManagerComponent implements OnInit {
     });
   }
 
+  getUsersByUserName() {
+    if (this.userSearch && this.userSearch.length > 3) {
+      this.resetUsersList();
+      this.getUsersListForAssign();
+    }
+  }
 
   addUsersToAssignUsersList(data) {
     data.forEach((item, index) => {
