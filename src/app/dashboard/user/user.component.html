@@ -1,8 +1,7 @@
 <div class="d-flex justify-content-end align-items-center">
   <label class='m-0'>Select User</label>
   <div class="col-md-4 pr-0">
-    <input type="text" autocomplete="off" placeholder="Search User Here" (keyup)="getUsersList(userSearch)" name="userSearch"
-      [(ngModel)]="userSearch" list="user" class="form-control">
+    <input type="text" autocomplete="off" placeholder="Search User Here" (keyup)="getUsersList(userSearch)" name="userSearch" [(ngModel)]="userSearch" list="user" class="form-control">
     <datalist id="user">
       <option *ngFor="let item of userList" [value]="item.userName">{{item.userName}}</option>
     </datalist>
@@ -73,15 +72,17 @@
   <div class="card-header bg-primary text-white">
     Drag a column header and drop it hear to group by that column
   </div>
-  <table class="table table-bordered table-responsive mb-0 table-height" infiniteScroll [infiniteScrollDistance]="3"
-    [infiniteScrollUpDistance]="1.5" (scrolled)="onScroll()" (scrolledUp)="onScrollUp()" [scrollWindow]="false">
+  <table class="table table-bordered table-responsive mb-0 table-height" infiniteScroll [infiniteScrollDistance]="3" [infiniteScrollUpDistance]="1.5" (scrolled)="onScroll()" (scrolledUp)="onScrollUp()" [scrollWindow]="false">
     <div class="text-nowrap">
       <thead class="bg-primary text-white">
         <tr>
           <th scope="col">Task Name <i class="fa fa-filter"></i></th>
-          <th scope="col">Order Number <i class="fa fa-filter" style="cursor:pointer;" (click)="_orderNumberSearch=!_orderNumberSearch"></i>
-            <input autocomplete="off" class="form-control" *ngIf="_orderNumberSearch" type="text" placeholder="Enter order number"
-              (keyup)="getTasksByorderNumberSearch()" name="orderNumberSearch" [(ngModel)]="orderNumberSearch">
+          <th scope="col">
+            <span *ngIf="!_orderNumberSearch">Order Number <i class="fa fa-filter" style="cursor:pointer;" (click)="_orderNumberSearch=!_orderNumberSearch"></i></span>
+            <span *ngIf="_orderNumberSearch" class="d-flex align-items-center">
+              <input autocomplete="off" class="form-control" style="min-width: 135px" type="text" placeholder="Enter order number" (keyup)="getTasksByorderNumberSearch()" name="orderNumberSearch" [(ngModel)]="orderNumberSearch">
+              <i class="fa fa-close ml-2" style="cursor:pointer;" (click)="_orderNumberSearch=!_orderNumberSearch"></i>
+            </span>
           </th>
           <th scope="col">Loan Number <i class="fa fa-filter"></i></th>
           <th scope="col">Transaction type <i class="fa fa-filter"></i></th>
