@@ -56,9 +56,8 @@ export class AssignPopupComponent implements OnInit, OnDestroy {
   }
 
   getUsersByUserName() {
-    if (this.userSearch && this.userSearch.length > 3) {
+    if ((this.userSearch && this.userSearch.length > 3) || !this.userSearch) {
       this.resetUsersList();
-      this.getUsersListForAssign();
     }
   }
 
@@ -81,6 +80,7 @@ export class AssignPopupComponent implements OnInit, OnDestroy {
     this.pageSize = 10;
     this.totalUsersRecords = 0;
     this.assignUsersList = [];
+    this.getUsersListForAssign();
   }
 
   closeAssignModel() {
