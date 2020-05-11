@@ -185,6 +185,7 @@ export class ManagerComponent implements OnInit {
       this.toastr.success('User Assigned Successfully', 'Success');
       this.assignModalReference.close();
       this.checked = {};
+      this.isCheckedAllRow();
     }, error => {
       this.toastr.error(error.error, 'Error');
     });
