@@ -184,6 +184,7 @@ export class ManagerComponent implements OnInit {
     this.dashboardService.assignUser(requestObj).subscribe(res => {
       this.toastr.success('User Assigned Successfully', 'Success');
       this.assignModalReference.close();
+      this.checked = {};
     }, error => {
       this.toastr.error(error.error, 'Error');
     });
