@@ -2,11 +2,22 @@
 .bg-header {
   background-color: #4e92da !important;
 }
-button:focus{
+button:focus {
   outline: none !important;
 }
-.modal-header{
-       padding: 0.8rem 1rem !important; 
+.modal-header {
+  padding: 0.8rem 1rem !important;
 }
-.cursor-pointer{cursor: default;}
-.form-control:focus{box-shadow: none!important;}
+.cursor-pointer {
+  cursor: default;
+}
+.form-control:focus {
+  box-shadow: none !important;
+}
+
+thead tr:nth-child(1) th {
+  position: sticky;
+  background-color: rgba(0, 123, 255);
+  top: 0;
+  z-index: 10;
+}
