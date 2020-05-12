@@ -70,13 +70,15 @@ export class UserComponent implements OnInit {
   };
 
   lineChart: object = {
-    labels: ['Blue', 'Green', 'Purple', 'Orange'],
+    labels: [20,40,60,80,100],
+    // labels: ['Blue', 'Green', 'Purple', 'Orange'],
     datasets: [
       {
         label: 'My Rank',
         backgroundColor: "#fff",
-        borderColor: 'blue',
+        borderColor: '#037ffc',
         fill: false,
+        lineTension: 0,
         data: [20, 45, 60, 35, 85, 50],
       },
       /* {
@@ -90,7 +92,8 @@ export class UserComponent implements OnInit {
         label: 'Average Peer Rank',
         backgroundColor: "#fff",
         fill: false,
-        borderColor: 'red',
+        borderColor: '#fc0339',
+        lineTension: 0,
         data: [50, 35, 40, 65, 25, 90],
       }
     ]

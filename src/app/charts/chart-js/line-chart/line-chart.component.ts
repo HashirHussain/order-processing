@@ -25,6 +25,7 @@ export class LineChartComponent implements OnInit {
         type: 'line',
         data: this.data,
         options: {
+          // bezierCurve: false,
           scales: {
             yAxes: [{
               ticks: {
@@ -45,7 +46,16 @@ export class LineChartComponent implements OnInit {
             // showLine: true,
             // fill: false,
             steppedLine: true
-          }
+          },
+          title: {
+            display: true,
+            position: 'top',
+            align: 'start',
+            text: 'My Productivity Rank                       My Quality Rank                   My Audit Rank',
+            // text: ['Review Decision', 'Request Decision'],
+            fontStyle: 'normal',
+            fontSize: 12
+          },
         }
       });
     }

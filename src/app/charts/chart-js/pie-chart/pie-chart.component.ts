@@ -60,7 +60,7 @@ export class PieChartComponent implements OnInit {
             display: true,
             position: 'top',
             align: 'start',
-            text: 'Review Decision',
+            text: 'Review Decision              Request Decision',
             // text: ['Review Decision', 'Request Decision'],
             fontStyle: 'normal',
             fontSize: 12
