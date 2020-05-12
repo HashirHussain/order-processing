@@ -173,7 +173,7 @@ export class UserComponent implements OnInit {
     if (this.selectedUser && this.selectedUser['userID']) {
       this.isLoading = true;
       let payload = `userId=${this.selectedUser['userID']}&page=${this.page}&pageSize=${this.pageSize}`;
-      if (this.orderNumberSearch && this.orderNumberSearch.length > 3) {
+      if (this.orderNumberSearch && this.orderNumberSearch.length > 1) {
         payload = payload + `&orderNumber=${this.orderNumberSearch}`;
       }
       // const payload = `userId=${this.selectedUser['userID']}&page=${this.page}&pageSize=${this.pageSize}`;
@@ -199,7 +199,7 @@ export class UserComponent implements OnInit {
    * @memberof UserComponent
    */
   getTasksByorderNumberSearch() {
-    if (this.orderNumberSearch.length > 3) {
+    if (this.orderNumberSearch.length > 1) {
       this.resetList();
       this.getTasksList();
     }
@@ -245,4 +245,5 @@ export class UserComponent implements OnInit {
     console.log('on scroll up');
   }
 
+  
 }

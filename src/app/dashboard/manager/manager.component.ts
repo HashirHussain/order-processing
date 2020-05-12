@@ -54,6 +54,8 @@ export class ManagerComponent implements OnInit {
   checked: any = {};
   isCheckedAll: boolean;
   isAssignButton: boolean = false;
+  _orderNumberSearch: boolean;
+  orderNumberSearch: string = '';
 
   constructor(private dashboardService: UsersService, private modalService: NgbModal, private toastr: ToastrService) { }
 
@@ -86,7 +88,10 @@ export class ManagerComponent implements OnInit {
   getTasksList() {
     if (this.selectedUser && this.selectedUser['userID']) {
       this.isLoading = true;
-      const payload = `userId=${this.selectedUser['userID']}&page=${this.page}&pageSize=${this.pageSize}`;
+      let payload = `userId=${this.selectedUser['userID']}&page=${this.page}&pageSize=${this.pageSize}`;
+      if (this.orderNumberSearch && this.orderNumberSearch.length > 3) {
+        payload = payload + `&orderNumber=${this.orderNumberSearch}`;
+      }
       this.dashboardService.getManagerTasksList(payload).subscribe({
         next: result => {
           // console.log('result', result);
@@ -112,6 +117,12 @@ export class ManagerComponent implements OnInit {
     });
 
     this.isCheckedAllRow();
+  }
+  getTasksByorderNumberSearch() {
+    if (this.orderNumberSearch.length > 3) {
+      this.resetList();
+      this.getTasksList();
+    }
   }
 
   onScroll() {
