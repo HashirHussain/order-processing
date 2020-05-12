@@ -70,7 +70,7 @@ export class UserComponent implements OnInit {
   };
 
   lineChart: object = {
-    labels: [20,40,60,80,100],
+    labels: [20, 40, 60, 80, 100],
     // labels: ['Blue', 'Green', 'Purple', 'Orange'],
     datasets: [
       {
@@ -243,6 +243,13 @@ export class UserComponent implements OnInit {
 
   onScrollUp() {
     console.log('on scroll up');
+  }
+
+  clearSearch() {
+    this._orderNumberSearch = false;
+    this.orderNumberSearch = '';
+    this.resetList();
+    this.getTasksList();
   }
 
 }

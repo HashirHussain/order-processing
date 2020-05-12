@@ -81,7 +81,7 @@
             <span *ngIf="!_orderNumberSearch">Order Number <i class="fa fa-filter" style="cursor:pointer;" (click)="_orderNumberSearch=!_orderNumberSearch"></i></span>
             <span *ngIf="_orderNumberSearch" class="d-flex align-items-center" style="height: 20px;">
               <input autocomplete="off" class="form-control" style="min-width: 135px" type="text" placeholder="Order Number" (keyup)="getTasksByorderNumberSearch()" name="orderNumberSearch" [(ngModel)]="orderNumberSearch">
-              <i class="fa fa-close ml-2" style="cursor:pointer;" (click)="_orderNumberSearch=!_orderNumberSearch"></i>
+              <i class="fa fa-close ml-2" style="cursor:pointer;" (click)="clearSearch()"></i>
             </span>
           </th>
           <th scope="col">Loan Number <i class="fa fa-filter"></i></th>
