@@ -183,6 +183,12 @@ export class ManagerComponent implements OnInit {
       }
     });
   }
+  clearSearch() {
+    this._orderNumberSearch = false;
+    this.orderNumberSearch = '';
+    this.resetList();
+    this.getTasksList();
+  }
 
   onAssign(selectedAssignUser) {
     let taskTrackingIds = Object.keys(this.checked);
