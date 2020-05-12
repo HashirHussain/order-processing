@@ -53,13 +53,17 @@ export class PieChartComponent implements OnInit {
             display: true,
             labels: {
               // fontColor: 'rgb(255, 99, 132)'
+              boxWidth: 0
             }
           },
           title: {
             display: true,
             position: 'top',
+            align: 'start',
             text: 'Review Decision',
-            fontSize: 14
+            // text: ['Review Decision', 'Request Decision'],
+            fontStyle: 'normal',
+            fontSize: 12
           },
           subtitle: {
             text: 'Request Decision'

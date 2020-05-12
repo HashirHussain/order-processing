@@ -33,10 +33,12 @@ export class LineChartComponent implements OnInit {
             }]
           },
           legend: {
-            position: 'bottom',
             display: true,
+            position: 'top',
+            paddingBottom: 25,
             labels: {
-              // fontColor: 'rgb(255, 99, 132)'
+              // fontColor: 'rgb(255, 99, 132)', // 'rgb(255, 99, 132)',
+              boxWidth: 10
             }
           },
           plugins: {

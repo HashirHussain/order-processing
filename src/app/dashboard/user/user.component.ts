@@ -73,6 +73,29 @@ export class UserComponent implements OnInit {
     labels: ['Blue', 'Green', 'Purple', 'Orange'],
     datasets: [
       {
+        label: 'My Rank',
+        backgroundColor: "#fff",
+        borderColor: 'blue',
+        fill: false,
+        data: [20, 45, 60, 35, 85, 50],
+      },
+      /* {
+        label: 'XYZW',
+        backgroundColor: "#fff",
+        borderColor: 'green',
+        fill: false,
+        data: [0, 25, 40, 15, 45, 70],
+      }, */
+      {
+        label: 'Average Peer Rank',
+        backgroundColor: "#fff",
+        fill: false,
+        borderColor: 'red',
+        data: [50, 35, 40, 65, 25, 90],
+      }
+    ]
+    /* datasets: [
+      {
         label: '# of Votes',
         data: [5, 9, 15, 7, 3],
         backgroundColor: [
@@ -86,7 +109,7 @@ export class UserComponent implements OnInit {
         ],
         borderWidth: 1
       }
-    ]
+    ] */
   };
 
   highchartPie: object = {

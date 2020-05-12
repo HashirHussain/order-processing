@@ -54,14 +54,16 @@ export class DoughnutChartComponent implements OnInit {
             display: true,
             labels: {
               // fontColor: 'rgb(255, 99, 132)'
+              boxWidth: 0
             }
           },
           title: {
             display: true,
             position: 'top',
             text: 'My Completed Goal',
-            fontSize: 14
-          },
+            fontStyle: 'normal',
+            fontSize: 12
+          }
         }
       });
     }
