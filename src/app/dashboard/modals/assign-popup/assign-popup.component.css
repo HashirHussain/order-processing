@@ -6,11 +6,6 @@
   color: white;
 }
 
-.table-height {
-  overflow: scroll;
-  max-height: 300px;
-}
-
 th {
   color: white;
 }
@@ -22,16 +17,6 @@ th {
 }
 .modal-backdrop {
   background-color: transparent !important;
-}
-
-.no-record {
-  text-align: center;
-  font-size: 18px;
-  font-weight: bold;
-  color: #575b5f;
-  position: relative;
-  padding-top: 20px;
-  padding-bottom: 20px;
 }
 
 .table-tr {

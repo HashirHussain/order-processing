@@ -15,9 +15,25 @@ button:focus {
   box-shadow: none !important;
 }
 
+/* For Table */
+.table-height {
+  overflow: scroll;
+  max-height: 300px;
+}
+
 thead tr:nth-child(1) th {
   position: sticky;
   background-color: rgba(0, 123, 255);
   top: 0;
   z-index: 10;
+}
+
+.no-record {
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+  color: #575b5f;
+  position: relative;
+  padding-top: 20px;
+  padding-bottom: 20px;
 }

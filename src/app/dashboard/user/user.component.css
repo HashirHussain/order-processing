@@ -1,28 +1,6 @@
-table {
-  overflow-y: scroll;
-  height: 300px;
-}
-
-.no-record {
-  text-align: center;
-  font-size: 18px;
-  font-weight: bold;
-  color: #575b5f;
-  position: relative;
-  padding-top: 20px;
-  padding-bottom: 20px;
-}
-
 .ellipsis {
   /* max-width: 100px; */
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-}
-
-th {
-   position: sticky;
-  top: 0;
-  box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.4);
-  background-color: #007bff !important;
 }
