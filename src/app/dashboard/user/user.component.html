@@ -79,8 +79,8 @@
           <th scope="col">Task Name <i class="fa fa-filter"></i></th>
           <th scope="col">
             <span *ngIf="!_orderNumberSearch">Order Number <i class="fa fa-filter" style="cursor:pointer;" (click)="_orderNumberSearch=!_orderNumberSearch"></i></span>
-            <span *ngIf="_orderNumberSearch" class="d-flex align-items-center">
-              <input autocomplete="off" class="form-control" style="min-width: 135px" type="text" placeholder="Enter order number" (keyup)="getTasksByorderNumberSearch()" name="orderNumberSearch" [(ngModel)]="orderNumberSearch">
+            <span *ngIf="_orderNumberSearch" class="d-flex align-items-center" style="height: 20px;">
+              <input autocomplete="off" class="form-control" style="min-width: 135px" type="text" placeholder="Order Number" (keyup)="getTasksByorderNumberSearch()" name="orderNumberSearch" [(ngModel)]="orderNumberSearch">
               <i class="fa fa-close ml-2" style="cursor:pointer;" (click)="_orderNumberSearch=!_orderNumberSearch"></i>
             </span>
           </th>
