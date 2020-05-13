@@ -1,225 +1,207 @@
 <div class="container-fluid">
-    <div class="container">
-        <div class="col-md-12 mt-2">
-            <h4>Client Underwriting Configuration</h4>
-            <small>93 - Wells Fargo</small>
-            <div class="card mb-4">
-                <div class="card-header bg-primary text-white">
-                    HISTORY VARIANCE
-                </div>
-                <div class="card-body">
-
-                    <div class="col-md-12 d-flex mb-3 mr-0 p-0">
-                        <div class="form-check">
-                            <label class="form-check-label">
-                                <input type="radio" class="form-check-input" name="optradio">History Variance Standard
-                                Threshold
-                            </label>
-                        </div>
-                        <div class="form-check ml-4">
-                            <label class="form-check-label">
-                                <input type="radio" class="form-check-input" name="optradio" checked>History Variance By
-                                Tiers
-                            </label>
-                        </div>
-                        <div class="form-check ml-5">
-                            <label class="form-check-label">
-                                <input type="checkbox" class="form-check-input"
-                                    (click)='onCheckboxClick($event)'>Include Variance Addendum
-                                w/report
-                                delivery
-                            </label>
-                        </div>
-                    </div>
-                    <div class="col-md-12 d-flex mr-0 p-0">
-                        <div class="form-group col-md-6 p-0">
-                            <label for="historyTimeframe">History Timeframe(months)</label>
-                            <input class="form-control" type="text" name="" id="historyTimeframe" value="7 ">
-                        </div>
-                        <div class="form-group col-md-6 p-0 pl-3">
-                            <label for="valueVarianceThreshold">Value Variance Threshold(%)</label>
-                            <input class="form-control" type="text" name="" id="valueVarianceThreshold" value="13"
-                                disabled>
-                        </div>
-                    </div>
-
-                    <div class="col-md-12 d-flex justify-content-between mb-3 mr-0 p-0">
-                        <a><u>Market Value Threshold</u></a>
-                        <button type="button" class="btn-sm btn btn-primary" (click)="addNewRecord(content)">Add
-                            New</button>
-                    </div>
-                    <div class="table-responsive">
-                        <table class="table table-bordered table-sm">
-                            <thead class="bg-primary">
-                                <tr>
-                                    <th scope="col">From</th>
-                                    <th scope="col">To</th>
-                                    <th scope="col">Variance Threshold</th>
-                                    <th scope="col" *ngIf='isIncludeRepdel'>REPDEL_INCL</th>
-                                    <th scope="col">Edit</th>
-                                    <th scope="col">Delete</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <ng-container *ngIf="mvtData.length">
-                                    <tr *ngFor="let _value of mvtData; let inx = index">
-                                        <td scope="col">$ {{ _value.mkt_Val_From }}</td>
-                                        <td scope="col">$ {{ _value.mkt_Val_To}}</td>
-                                        <td scope="col">{{ _value.var_Threshold }}%</td>
-                                        <td scope="col" *ngIf='isIncludeRepdel'>X</td>
-                                        <td scope="col">
-                                            <i class="fa fa-edit" aria-hidden="true"
-                                                (click)="onEdit(_value, content, inx)"></i>
-                                        </td>
-                                        <td scope="col">
-                                            <i class="fa fa-trash" aria-hidden="true"
-                                                (click)="openDeleteModal(deleteModal,_value)"></i>
-                                        </td>
-                                    </tr>
-                                </ng-container>
-                                <tr *ngIf="!isLoading && totalRecords===0">
-                                    <td colspan="5" class="no-record">No records found</td>
-                                </tr>
-                                <tr *ngIf="isLoading">
-                                    <td colspan="5" class="no-record">Loading . . .</td>
-                                </tr>
-                            </tbody>
-                        </table>
-
-                        <div class="d-flex p-2 pagination justify-content-between">
-                            <div class="d-flex">
-                                <ngb-pagination [collectionSize]="totalRecords" [maxSize]="5" [ellipses]="false"
-                                    (pageChange)="onPageChange($event)" [rotate]="true" [(page)]="page"
-                                    [pageSize]="pageSize" [boundaryLinks]="true">
-                                </ngb-pagination>
-
-                                <div class="d-flex align-items-center ml-3">
-                                    <select class="custom-select" (change)="onNoOfListRecordsChange(pageSize)"
-                                        style="width: auto;" [(ngModel)]="pageSize">
-                                        <option [ngValue]="5">5</option>
-                                        <option [ngValue]="10">10</option>
-                                        <option [ngValue]="20">20</option>
-                                        <option [ngValue]="50">50</option>
-                                    </select>
-                                    <div class="ml-2">items per page</div>
-                                </div>
-                            </div>
-
-                            <div class="table-refresh d-flex align-items-center">
-                                <span> {{tableTotalRecords}}</span>
-                                <i class="fa fa-refresh ml-4" aria-hidden="true" (click)="onRefresh()"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+  <div class="container">
+    <div class="col-md-12 mt-2">
+      <h4>Client Underwriting Configuration</h4>
+      <small>93 - Wells Fargo</small>
+      <div class="card mb-4">
+        <div class="card-header bg-primary text-white">
+          HISTORY VARIANCE
         </div>
+        <div class="card-body">
+
+          <div class="col-md-12 d-flex mb-3 mr-0 p-0">
+            <div class="form-check">
+              <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="optradio">History Variance Standard
+                Threshold
+              </label>
+            </div>
+            <div class="form-check ml-4">
+              <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="optradio" checked>History Variance By
+                Tiers
+              </label>
+            </div>
+            <div class="form-check ml-5">
+              <label class="form-check-label">
+                <input type="checkbox" class="form-check-input" (click)='onCheckboxClick($event)'>Include Variance Addendum
+                w/report
+                delivery
+              </label>
+            </div>
+          </div>
+          <div class="col-md-12 d-flex mr-0 p-0">
+            <div class="form-group col-md-6 p-0">
+              <label for="historyTimeframe">History Timeframe(months)</label>
+              <input class="form-control" type="text" name="" id="historyTimeframe" value="7 ">
+            </div>
+            <div class="form-group col-md-6 p-0 pl-3">
+              <label for="valueVarianceThreshold">Value Variance Threshold(%)</label>
+              <input class="form-control" type="text" name="" id="valueVarianceThreshold" value="13" disabled>
+            </div>
+          </div>
+
+          <div class="col-md-12 d-flex justify-content-between mb-3 mr-0 p-0">
+            <a><u>Market Value Threshold</u></a>
+            <button type="button" class="btn-sm btn btn-primary" (click)="addNewRecord(content)">Add
+              New</button>
+          </div>
+          <div class="table-responsive">
+            <table class="table table-bordered table-sm">
+              <thead class="bg-primary">
+                <tr>
+                  <th scope="col">From</th>
+                  <th scope="col">To</th>
+                  <th scope="col">Variance Threshold</th>
+                  <th scope="col" *ngIf='isIncludeRepdel'>REPDEL_INCL</th>
+                  <th scope="col">Edit</th>
+                  <th scope="col">Delete</th>
+                </tr>
+              </thead>
+              <tbody>
+                <ng-container *ngIf="mvtData.length">
+                  <tr *ngFor="let _value of mvtData; let inx = index">
+                    <td scope="col">$ {{ _value.mkt_Val_From }}</td>
+                    <td scope="col">$ {{ _value.mkt_Val_To}}</td>
+                    <td scope="col">{{ _value.var_Threshold }}%</td>
+                    <td scope="col" *ngIf='isIncludeRepdel'>X</td>
+                    <td scope="col">
+                      <i class="fa fa-edit" aria-hidden="true" (click)="onEdit(_value, content, inx)"></i>
+                    </td>
+                    <td scope="col">
+                      <i class="fa fa-trash" aria-hidden="true" (click)="openDeleteModal(deleteModal,_value)"></i>
+                    </td>
+                  </tr>
+                </ng-container>
+                <tr *ngIf="!isLoading && totalRecords===0">
+                  <td colspan="5" class="no-record">No records found</td>
+                </tr>
+                <tr *ngIf="isLoading">
+                  <!-- <td colspan="5" class="no-record">Loading . . .</td> -->
+                  <td colspan="5" class="no-record">
+                    <app-loader></app-loader>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div class="d-flex p-2 pagination justify-content-between">
+              <div class="d-flex">
+                <ngb-pagination [collectionSize]="totalRecords" [maxSize]="5" [ellipses]="false" (pageChange)="onPageChange($event)" [rotate]="true" [(page)]="page" [pageSize]="pageSize" [boundaryLinks]="true">
+                </ngb-pagination>
+
+                <div class="d-flex align-items-center ml-3">
+                  <select class="custom-select" (change)="onNoOfListRecordsChange(pageSize)" style="width: auto;" [(ngModel)]="pageSize">
+                    <option [ngValue]="5">5</option>
+                    <option [ngValue]="10">10</option>
+                    <option [ngValue]="20">20</option>
+                    <option [ngValue]="50">50</option>
+                  </select>
+                  <div class="ml-2">items per page</div>
+                </div>
+              </div>
+
+              <div class="table-refresh d-flex align-items-center">
+                <span> {{tableTotalRecords}}</span>
+                <i class="fa fa-refresh ml-4" aria-hidden="true" (click)="onRefresh()"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
 
 
-    <ng-template #content let-modal>
-        <div class="modal-header">
-            <h4 class="modal-title" id="modal-basic-title">
-                {{(submitButtonLabel==='Save'?'Add New':'Edit')}} Threshold</h4>
-            <button type="button" class="close" aria-label="Close" (click)="closeModal()">
-                <span aria-hidden="true">&times;</span>
-            </button>
+  <ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">
+        {{(submitButtonLabel==='Save'?'Add New':'Edit')}} Threshold</h4>
+      <button type="button" class="close" aria-label="Close" (click)="closeModal()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form (ngSubmit)="onSubmit()" [formGroup]="mvtForm" novalidate>
+        <div class="form-group row mb-2">
+          <label class="col-md-4 col-form-label" for="mkt_Val_FromId">From:</label>
+          <div class="col-md-8">
+            <input class="form-control" id="mkt_Val_FromId" type="text" placeholder="Enter from value" formControlName="mkt_Val_From" autocomplete="off" [ngClass]="{'is-invalid': isFormSubmitted && !mvtForm.get('mkt_Val_From').valid }" />
+            <span class="invalid-feedback" *ngIf="isFormSubmitted && mvtForm.get('mkt_Val_From').errors?.required">
+              Please enter from value
+            </span>
+            <span class="invalid-feedback" *ngIf="isFormSubmitted && mvtForm.get('mkt_Val_From').errors?.min">
+              Please enter valid value
+            </span>
+            <span class="invalid-feedback" *ngIf="isFormSubmitted && mvtForm.get('mkt_Val_From').errors?.pattern">
+              Please enter numbers only
+            </span>
+          </div>
         </div>
-        <div class="modal-body">
-            <form (ngSubmit)="onSubmit()" [formGroup]="mvtForm" novalidate>
-                <div class="form-group row mb-2">
-                    <label class="col-md-4 col-form-label" for="mkt_Val_FromId">From:</label>
-                    <div class="col-md-8">
-                        <input class="form-control" id="mkt_Val_FromId" type="text" placeholder="Enter from value"
-                            formControlName="mkt_Val_From" autocomplete="off"
-                            [ngClass]="{'is-invalid': isFormSubmitted && !mvtForm.get('mkt_Val_From').valid }" />
-                        <span class="invalid-feedback"
-                            *ngIf="isFormSubmitted && mvtForm.get('mkt_Val_From').errors?.required">
-                            Please enter from value
-                        </span>
-                        <span class="invalid-feedback"
-                            *ngIf="isFormSubmitted && mvtForm.get('mkt_Val_From').errors?.min">
-                            Please enter valid value
-                        </span>
-                        <span class="invalid-feedback"
-                            *ngIf="isFormSubmitted && mvtForm.get('mkt_Val_From').errors?.pattern">
-                            Please enter numbers only
-                        </span>
-                    </div>
-                </div>
 
-                <div class="form-group row mb-2">
-                    <label class="col-md-4 col-form-label" for="mkt_Val_ToId">To:</label>
-                    <div class="col-md-8">
-                        <input class="form-control" id="mkt_Val_ToId" type="text" placeholder="Enter to value"
-                            formControlName="mkt_Val_To" autocomplete="off"
-                            [ngClass]="{'is-invalid': isFormSubmitted && !mvtForm.get('mkt_Val_To').valid }" />
-                        <span class="invalid-feedback"
-                            *ngIf="isFormSubmitted && mvtForm.get('mkt_Val_To').errors?.required">
-                            Please enter to value
-                        </span>
-                        <span class="invalid-feedback" *ngIf="isFormSubmitted && mvtForm.get('mkt_Val_To').errors?.min">
-                            Please enter valid value
-                        </span>
-                        <span class="invalid-feedback"
-                            *ngIf="isFormSubmitted && mvtForm.get('mkt_Val_To').errors?.pattern">
-                            Please enter numbers only
-                        </span>
-                        <span class="invalid-feedback"
-                            *ngIf="isFormSubmitted && mvtForm.get('mkt_Val_To').errors?.validateRange">
-                            To value should be greater than from
-                        </span>
-                    </div>
-                </div>
-
-                <div class="form-group row mb-2">
-                    <label class="col-md-4 col-form-label" for="var_ThresholdId">Variance Threshold:</label>
-                    <div class="col-md-8">
-                        <input class="form-control" id="var_ThresholdId" type="text"
-                            placeholder="Enter variance threshold" formControlName="var_Threshold" autocomplete="off"
-                            [ngClass]="{'is-invalid': isFormSubmitted && !mvtForm.get('var_Threshold').valid }" />
-                        <span class="invalid-feedback"
-                            *ngIf="isFormSubmitted && mvtForm.get('var_Threshold').errors?.required">
-                            Please enter variance threshold
-                        </span>
-                        <span class="invalid-feedback" *ngIf="isFormSubmitted && mvtForm.get('var_Threshold').errors?.min">
-                            Please enter valid value
-                        </span>
-                        <span class="invalid-feedback"
-                            *ngIf="isFormSubmitted && mvtForm.get('var_Threshold').errors?.pattern">
-                            Please enter numbers only
-                        </span>
-                    </div>
-                </div>
-
-                <div class="d-flex justify-content-center">
-                    <button class="btn btn-primary mr-3" style="width:80px;" type="submit">
-                        {{submitButtonLabel}}
-                    </button>
-                    <button class="btn btn-primary" style="width:80px;" (click)="closeModal()" type="button">
-                        Cancel
-                    </button>
-                </div>
-            </form>
+        <div class="form-group row mb-2">
+          <label class="col-md-4 col-form-label" for="mkt_Val_ToId">To:</label>
+          <div class="col-md-8">
+            <input class="form-control" id="mkt_Val_ToId" type="text" placeholder="Enter to value" formControlName="mkt_Val_To" autocomplete="off" [ngClass]="{'is-invalid': isFormSubmitted && !mvtForm.get('mkt_Val_To').valid }" />
+            <span class="invalid-feedback" *ngIf="isFormSubmitted && mvtForm.get('mkt_Val_To').errors?.required">
+              Please enter to value
+            </span>
+            <span class="invalid-feedback" *ngIf="isFormSubmitted && mvtForm.get('mkt_Val_To').errors?.min">
+              Please enter valid value
+            </span>
+            <span class="invalid-feedback" *ngIf="isFormSubmitted && mvtForm.get('mkt_Val_To').errors?.pattern">
+              Please enter numbers only
+            </span>
+            <span class="invalid-feedback" *ngIf="isFormSubmitted && mvtForm.get('mkt_Val_To').errors?.validateRange">
+              To value should be greater than from
+            </span>
+          </div>
         </div>
-    </ng-template>
 
-    <ng-template #deleteModal let-modal>
-        <div class="modal-header">
-            <h4 class="modal-title" id="modal-basic-title">Do you want to delete selected Threshold ?</h4>
-            <button type="button" class="close" aria-label="Close" (click)="closeDeleteModal()">
-                <span aria-hidden="true">&times;</span>
-            </button>
+        <div class="form-group row mb-2">
+          <label class="col-md-4 col-form-label" for="var_ThresholdId">Variance Threshold:</label>
+          <div class="col-md-8">
+            <input class="form-control" id="var_ThresholdId" type="text" placeholder="Enter variance threshold" formControlName="var_Threshold" autocomplete="off" [ngClass]="{'is-invalid': isFormSubmitted && !mvtForm.get('var_Threshold').valid }" />
+            <span class="invalid-feedback" *ngIf="isFormSubmitted && mvtForm.get('var_Threshold').errors?.required">
+              Please enter variance threshold
+            </span>
+            <span class="invalid-feedback" *ngIf="isFormSubmitted && mvtForm.get('var_Threshold').errors?.min">
+              Please enter valid value
+            </span>
+            <span class="invalid-feedback" *ngIf="isFormSubmitted && mvtForm.get('var_Threshold').errors?.pattern">
+              Please enter numbers only
+            </span>
+          </div>
         </div>
-        <div class="modal-body">
-            <div class="d-flex justify-content-center">
-                <button class="btn btn-primary mr-3" (click)="onDelete()" style="width:80px;" type="button">
-                    Yes
-                </button>
-                <button class="btn btn-primary" style="width:80px;" (click)="closeDeleteModal()" type="button">
-                    No
-                </button>
-            </div>
+
+        <div class="d-flex justify-content-center">
+          <button class="btn btn-primary mr-3" style="width:80px;" type="submit">
+            {{submitButtonLabel}}
+          </button>
+          <button class="btn btn-primary" style="width:80px;" (click)="closeModal()" type="button">
+            Cancel
+          </button>
         </div>
-    </ng-template>
+      </form>
+    </div>
+  </ng-template>
+
+  <ng-template #deleteModal let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Do you want to delete selected Threshold ?</h4>
+      <button type="button" class="close" aria-label="Close" (click)="closeDeleteModal()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="d-flex justify-content-center">
+        <button class="btn btn-primary mr-3" (click)="onDelete()" style="width:80px;" type="button">
+          Yes
+        </button>
+        <button class="btn btn-primary" style="width:80px;" (click)="closeDeleteModal()" type="button">
+          No
+        </button>
+      </div>
+    </div>
+  </ng-template>
 </div>

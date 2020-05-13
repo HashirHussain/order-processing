@@ -13,6 +13,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { AssignPopupComponent } from './modals/assign-popup/assign-popup.component';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [DashboardComponent, UserComponent, ManagerComponent, AssignPopupComponent],
@@ -24,7 +25,8 @@ import { AssignPopupComponent } from './modals/assign-popup/assign-popup.compone
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
-    InfiniteScrollModule
+    InfiniteScrollModule,
+    SharedModule
   ],
   entryComponents: [
     AssignPopupComponent

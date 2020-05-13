@@ -21,13 +21,14 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { HttpInterceptorService } from "./utils/http-interceptor.service";
 import { CoverSheetModule } from "./cover-sheet/cover-sheet.module";
 import { ClientConfigComponent } from "./client-config/client-config.component";
+
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     LoginLogoutButtonComponent,
     BingMapComponent,
-    ClientConfigComponent,
+    ClientConfigComponent
   ],
   imports: [
     BrowserModule,

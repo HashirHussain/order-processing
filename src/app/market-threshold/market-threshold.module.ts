@@ -6,6 +6,7 @@ import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 
 import { MarketThresholdRoutingModule } from './market-threshold-routing.module';
 import { MarketThresholdComponent } from './market-threshold.component';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { MarketThresholdComponent } from './market-threshold.component';
     MarketThresholdRoutingModule,
     NgbModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SharedModule
   ]
 })
 export class MarketThresholdModule { }
