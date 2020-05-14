@@ -21,6 +21,10 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { HttpInterceptorService } from "./utils/http-interceptor.service";
 import { CoverSheetModule } from "./cover-sheet/cover-sheet.module";
 import { ClientConfigComponent } from "./client-config/client-config.component";
+import { LoaderComponent } from './loader/loader.component';
+import { LoaderInterceptor } from './utils/loader-interceptor.service';
+import { LoaderService} from './service/loader.service'
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,6 +32,7 @@ import { ClientConfigComponent } from "./client-config/client-config.component";
     LoginLogoutButtonComponent,
     BingMapComponent,
     ClientConfigComponent,
+    LoaderComponent,
   ],
   imports: [
     BrowserModule,
@@ -50,6 +55,8 @@ import { ClientConfigComponent } from "./client-config/client-config.component";
     CoverSheetModule,
   ],
   providers: [
+    LoaderService,
+    { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true },
     // { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     {
       provide: HTTP_INTERCEPTORS,
