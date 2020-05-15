@@ -33,112 +33,552 @@
       </div>
     </div>
     <div class="col-md-9 mt-2">
-      <div class="row shadow-lg text-white">
-        <div class="col-md-6 col-sm-12 bg-header">
-          <div class="row">
-            <div class="col-md-6">
-              <strong class="text-secondary">ORDER#</strong>
-              <h4>{{orderDetails.orderNumber}}</h4>
-              <div class="small">Created : {{orderDetails.orderCreationDate | date: 'dd/MM/yyyy'}}</div>
-              <div class="small">Completed : {{orderDetails.orderCompletionDate | date: 'dd/MM/yyyy'}}</div>
-              <div class="small">Close Date : {{orderDetails.orderCompletionDate | date: 'dd/MM/yyyy'}}</div>
+      <ngb-carousel>
+        <ng-template ngbSlide>
+          <div class="row shadow-lg text-white">
+            <div class="col-md-6 col-sm-12 bg-header">
+              <div class="row">
+                <div class="col-md-6">
+                  <strong class="text-secondary">ORDER#</strong>
+                  <h4>{{orderDetails.orderNumber}}</h4>
+                  <div class="small">Created : {{orderDetails.orderCreationDate | date: 'dd/MM/yyyy'}}</div>
+                  <div class="small">Completed : {{orderDetails.orderCompletionDate | date: 'dd/MM/yyyy'}}</div>
+                  <div class="small">Close Date : {{orderDetails.orderCompletionDate | date: 'dd/MM/yyyy'}}</div>
+                </div>
+                <div class="col-md-6">
+                  <strong class="text-secondary">LOAN#</strong>
+                  <h4>{{orderDetails.loanNumber}}</h4>
+                </div>
+              </div>
+              <div class="row mt-3">
+                <div class="col-md-12">
+                  <strong class="text-secondary">LENDER</strong>
+                  <div>{{orderDetails.lender}}</div>
+                </div>
+              </div>
+              <div class="row mt-3">
+                <div class="col-md-12">
+                  <strong class="text-secondary">BORROWER</strong>
+                  <div>{{orderDetails.borrower}}</div>
+                </div>
+              </div>
+              <div class="row mt-3">
+                <div class="col-md-12">
+                  <strong class="text-secondary">Address</strong>
+                  <address>
+                    <div>{{orderDetails.address}}, {{orderDetails.state}}</div>
+                    <div>{{orderDetails.country}}</div>
+                  </address>
+                </div>
+              </div>
+              <div class="row mt-2 small pb-3 text-center">
+                <div class="col-md-4">
+                  <h4 class="small">LOAN PURPOSE</h4>
+                  <p>{{orderDetails.loanPurpose}}</p>
+                </div>
+                <div class="col-md-4">
+                  <h4 class="small">LOAN TYPE</h4>
+                  <p>{{orderDetails.loanType}}</p>
+                </div>
+                <div class="col-md-4">
+                  <h4 class="small">FHA CASES#</h4>
+                  <p>{{orderDetails.fhaCase}}</p>
+                </div>
+              </div>
             </div>
-            <div class="col-md-6">
-              <strong class="text-secondary">LOAN#</strong>
-              <h4>{{orderDetails.loanNumber}}</h4>
-            </div>
-          </div>
-          <div class="row mt-3">
-            <div class="col-md-12">
-              <strong class="text-secondary">LENDER</strong>
-              <div>{{orderDetails.lender}}</div>
-            </div>
-          </div>
-          <div class="row mt-3">
-            <div class="col-md-12">
-              <strong class="text-secondary">BORROWER</strong>
-              <div>{{orderDetails.borrower}}</div>
-            </div>
-          </div>
-          <div class="row mt-3">
-            <div class="col-md-12">
-              <strong class="text-secondary">Address</strong>
-              <address>
-                <div>{{orderDetails.address}}, {{orderDetails.state}}</div>
-                <div>{{orderDetails.country}}</div>
-              </address>
-            </div>
-          </div>
-          <div class="row mt-2 small pb-3 text-center">
-            <div class="col-md-4">
-              <h4 class="small">LOAN PURPOSE</h4>
-              <p>{{orderDetails.loanPurpose}}</p>
-            </div>
-            <div class="col-md-4">
-              <h4 class="small">LOAN TYPE</h4>
-              <p>{{orderDetails.loanType}}</p>
-            </div>
-            <div class="col-md-4">
-              <h4 class="small">FHA CASES#</h4>
-              <p>{{orderDetails.fhaCase}}</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6 col-sm-12">
-          <div class="row">
-            <div class="col-md-6">
-              <strong class="text-secondary text-uppercase">{{productDetails.status}}</strong>
-              <h4>{{orderDetails.orderNumber}}</h4>
-              <div class="small">Created: {{orderDetails.orderCreationDate | date: 'dd/MM/yyyy'}}</div>
-              <div class="small">Completed: {{orderDetails.orderCompletionDate | date: 'dd/MM/yyyy'}}</div>
-              <div class="small">Close Date: {{orderDetails.orderCompletionDate | date: 'dd/MM/yyyy'}}</div>
-            </div>
-          </div>
-          <div class="row mt-3">
-            <div class="col-md-6">
-              <strong class="text-secondary">MARKET VALUE</strong>
-              <div class="text-dark font-weight-bold">{{productDetails.marketValue}}</div>
-            </div>
-            <div class="col-md-6">
-              <strong class="text-secondary">AVM STATUS</strong>
-              <div class="text-dark font-weight-bold">{{productDetails.avmStatus}}</div>
-            </div>
-          </div>
-          <div class="row mt-3">
-            <div class="col-md-6">
-              <strong class="text-secondary">PRODUCT</strong>
-              <div class="text-dark font-weight-bold">{{productDetails.product}}</div>
-            </div>
-            <div class="col-md-6">
-              <strong class="text-secondary">CORRECTION PRODUCT</strong>
-              <div class="text-dark font-weight-bold">
-                {{productDetails.product}}
+            <div class="col-md-6 col-sm-12">
+              <div class="row">
+                <div class="col-md-6">
+                  <strong class="text-secondary text-uppercase">{{productDetails.status}}</strong>
+                  <h4>{{orderDetails.orderNumber}}</h4>
+                  <div class="small">Created: {{orderDetails.orderCreationDate | date: 'dd/MM/yyyy'}}</div>
+                  <div class="small">Completed: {{orderDetails.orderCompletionDate | date: 'dd/MM/yyyy'}}</div>
+                  <div class="small">Close Date: {{orderDetails.orderCompletionDate | date: 'dd/MM/yyyy'}}</div>
+                </div>
+              </div>
+              <div class="row mt-3">
+                <div class="col-md-6">
+                  <strong class="text-secondary">MARKET VALUE</strong>
+                  <div class="text-dark font-weight-bold">{{productDetails.marketValue}}</div>
+                </div>
+                <div class="col-md-6">
+                  <strong class="text-secondary">AVM STATUS</strong>
+                  <div class="text-dark font-weight-bold">{{productDetails.avmStatus}}</div>
+                </div>
+              </div>
+              <div class="row mt-3">
+                <div class="col-md-6">
+                  <strong class="text-secondary">PRODUCT</strong>
+                  <div class="text-dark font-weight-bold">{{productDetails.product}}</div>
+                </div>
+                <div class="col-md-6">
+                  <strong class="text-secondary">CORRECTION PRODUCT</strong>
+                  <div class="text-dark font-weight-bold">
+                    {{productDetails.product}}
+                  </div>
+                </div>
+              </div>
+              <div class="row mt-3">
+                <div class="col-md-12">
+                  <strong class="text-secondary">VENDOR</strong>
+                  <div class="text-dark font-weight-bold">{{productDetails.vendor}}</div>
+                  <div class="text-dark font-weight-bold">QC Score: {{productDetails.qcScore}}</div>
+                </div>
+              </div>
+              <div class="row mt-2 small pb-3 text-center text-danger">
+                <div class="col-md-4">
+                  <h4 class="small font-weight-bold">COMMENTS</h4>
+                  <p>{{productDetails.comments}}</p>
+                </div>
+                <div class="col-md-4">
+                  <h4 class="small font-weight-bold">PRIOR HISTORY</h4>
+                  <p>{{productDetails.priorHistory}}</p>
+                </div>
+                <div class="col-md-4">
+                  <h4 class="small font-weight-bold">TIMES REJECTED</h4>
+                  <p>{{productDetails.timesRejected}}</p>
+                </div>
               </div>
             </div>
           </div>
-          <div class="row mt-3">
-            <div class="col-md-12">
-              <strong class="text-secondary">VENDOR</strong>
-              <div class="text-dark font-weight-bold">{{productDetails.vendor}}</div>
-              <div class="text-dark font-weight-bold">QC Score: {{productDetails.qcScore}}</div>
+        </ng-template>
+        <ng-template ngbSlide>
+          <div class="row shadow-lg text-white">
+            <div class="col-md-6 col-sm-12 bg-header">
+              <div class="row">
+                <div class="col-md-6">
+                  <strong class="text-secondary">License #</strong>
+                  <h4>License #</h4>
+                  <div class="small">Created : {{orderDetails.orderCreationDate | date: 'dd/MM/yyyy'}}</div>
+                  <div class="small">Completed : {{orderDetails.orderCompletionDate | date: 'dd/MM/yyyy'}}</div>
+                  <div class="small">Close Date : {{orderDetails.orderCompletionDate | date: 'dd/MM/yyyy'}}</div>
+                </div>
+                <div class="col-md-6">
+                  <strong class="text-secondary">LOAN#</strong>
+                  <h4>{{orderDetails.loanNumber}}</h4>
+                </div>
+              </div>
+              <div class="row mt-3">
+                <div class="col-md-12">
+                  <strong class="text-secondary">APPRAISER NAME</strong>
+                  <div>{{orderDetails.lender}}</div>
+                </div>
+              </div>
+              <div class="row mt-3">
+                <div class="col-md-12">
+                  <strong class="text-secondary">LICENSE EFFECTIVE DATE</strong>
+                  <div>{{orderDetails.borrower}}</div>
+                </div>
+              </div>
+              <div class="row mt-3">
+                <div class="col-md-12">
+                  <strong class="text-secondary">LICENSE EXPIRATION DATE</strong>
+                  <address>
+                    <div>{{orderDetails.address}}, {{orderDetails.state}}</div>
+                    <div>{{orderDetails.country}}</div>
+                  </address>
+                </div>
+              </div>
+              <div class="row mt-2 small pb-3 text-center">
+                <div class="col-md-4">
+                  <h4 class="small">LICENSE TYPE STATUS</h4>
+                  <p>{{orderDetails.loanPurpose}}</p>
+                </div>
+                <div class="col-md-4">
+                  <h4 class="small">LOAN TYPE</h4>
+                  <p>{{orderDetails.loanType}}</p>
+                </div>
+                <div class="col-md-4">
+                  <h4 class="small">FHA CASES#</h4>
+                  <p>{{orderDetails.fhaCase}}</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-sm-12">
+              <div class="row">
+                <div class="col-md-6">
+                  <strong class="text-secondary text-uppercase">APPRAISER COMPANY</strong>
+                  <h4>{{orderDetails.orderNumber}}</h4>
+                  <div class="small">Created: {{orderDetails.orderCreationDate | date: 'dd/MM/yyyy'}}</div>
+                  <div class="small">Completed: {{orderDetails.orderCompletionDate | date: 'dd/MM/yyyy'}}</div>
+                  <div class="small">Close Date: {{orderDetails.orderCompletionDate | date: 'dd/MM/yyyy'}}</div>
+                </div>
+              </div>
+              <div class="row mt-3">
+                <div class="col-md-6">
+                  <strong class="text-secondary">ADDRESS</strong>
+                  <div class="text-dark font-weight-bold">{{productDetails.marketValue}}</div>
+                </div>
+                <div class="col-md-6">
+                  <strong class="text-secondary">AVM STATUS</strong>
+                  <div class="text-dark font-weight-bold">{{productDetails.avmStatus}}</div>
+                </div>
+              </div>
+              <div class="row mt-3">
+                <div class="col-md-6">
+                  <strong class="text-secondary">PRODUCT</strong>
+                  <div class="text-dark font-weight-bold">{{productDetails.product}}</div>
+                </div>
+                <div class="col-md-6">
+                  <strong class="text-secondary">CORRECTION PRODUCT</strong>
+                  <div class="text-dark font-weight-bold">
+                    {{productDetails.product}}
+                  </div>
+                </div>
+              </div>
+              <div class="row mt-3">
+                <div class="col-md-12">
+                  <strong class="text-secondary">VENDOR</strong>
+                  <div class="text-dark font-weight-bold">{{productDetails.vendor}}</div>
+                  <div class="text-dark font-weight-bold">QC Score: {{productDetails.qcScore}}</div>
+                </div>
+              </div>
+              <div class="row mt-2 small pb-3 text-center text-danger">
+                <div class="col-md-4">
+                  <h4 class="small font-weight-bold">COMMENTS</h4>
+                  <p>{{productDetails.comments}}</p>
+                </div>
+                <div class="col-md-4">
+                  <h4 class="small font-weight-bold">PRIOR HISTORY</h4>
+                  <p>{{productDetails.priorHistory}}</p>
+                </div>
+                <div class="col-md-4">
+                  <h4 class="small font-weight-bold">TIMES REJECTED</h4>
+                  <p>{{productDetails.timesRejected}}</p>
+                </div>
+              </div>
             </div>
           </div>
-          <div class="row mt-2 small pb-3 text-center text-danger">
-            <div class="col-md-4">
-              <h4 class="small font-weight-bold">COMMENTS</h4>
-              <p>{{productDetails.comments}}</p>
+        </ng-template>
+
+        <ng-template ngbSlide>
+          <div class="row shadow-lg text-white">
+            <div class="col-md-6 col-sm-12 bg-header">
+              <div class="row">
+                <div class="col-md-6">
+                  <strong class="text-secondary">INSTRUCTIONS</strong>
+                  <h4>{{orderDetails.orderNumber}}</h4>
+                  <div class="small">Created : {{orderDetails.orderCreationDate | date: 'dd/MM/yyyy'}}</div>
+                  <div class="small">Completed : {{orderDetails.orderCompletionDate | date: 'dd/MM/yyyy'}}</div>
+                  <div class="small">Close Date : {{orderDetails.orderCompletionDate | date: 'dd/MM/yyyy'}}</div>
+                </div>
+                <div class="col-md-6">
+                  <strong class="text-secondary">LOAN#</strong>
+                  <h4>{{orderDetails.loanNumber}}</h4>
+                </div>
+              </div>
+              <div class="row mt-3">
+                <div class="col-md-12">
+                  <strong class="text-secondary">LENDER</strong>
+                  <div>{{orderDetails.lender}}</div>
+                </div>
+              </div>
+              <div class="row mt-3">
+                <div class="col-md-12">
+                  <strong class="text-secondary">BORROWER</strong>
+                  <div>{{orderDetails.borrower}}</div>
+                </div>
+              </div>
+              <div class="row mt-3">
+                <div class="col-md-12">
+                  <strong class="text-secondary">Address</strong>
+                  <address>
+                    <div>{{orderDetails.address}}, {{orderDetails.state}}</div>
+                    <div>{{orderDetails.country}}</div>
+                  </address>
+                </div>
+              </div>
+              <div class="row mt-2 small pb-3 text-center">
+                <div class="col-md-4">
+                  <h4 class="small">LOAN PURPOSE</h4>
+                  <p>{{orderDetails.loanPurpose}}</p>
+                </div>
+                <div class="col-md-4">
+                  <h4 class="small">LOAN TYPE</h4>
+                  <p>{{orderDetails.loanType}}</p>
+                </div>
+                <div class="col-md-4">
+                  <h4 class="small">FHA CASES#</h4>
+                  <p>{{orderDetails.fhaCase}}</p>
+                </div>
+              </div>
             </div>
-            <div class="col-md-4">
-              <h4 class="small font-weight-bold">PRIOR HISTORY</h4>
-              <p>{{productDetails.priorHistory}}</p>
-            </div>
-            <div class="col-md-4">
-              <h4 class="small font-weight-bold">TIMES REJECTED</h4>
-              <p>{{productDetails.timesRejected}}</p>
+            <div class="col-md-6 col-sm-12">
+              <div class="row">
+                <div class="col-md-6">
+                  <strong class="text-secondary text-uppercase">SPECIAL INSTRUCTIONS</strong>
+                  <h4>{{orderDetails.orderNumber}}</h4>
+                  <div class="small">Created: {{orderDetails.orderCreationDate | date: 'dd/MM/yyyy'}}</div>
+                  <div class="small">Completed: {{orderDetails.orderCompletionDate | date: 'dd/MM/yyyy'}}</div>
+                  <div class="small">Close Date: {{orderDetails.orderCompletionDate | date: 'dd/MM/yyyy'}}</div>
+                </div>
+              </div>
+              <div class="row mt-3">
+                <div class="col-md-6">
+                  <strong class="text-secondary">MARKET VALUE</strong>
+                  <div class="text-dark font-weight-bold">{{productDetails.marketValue}}</div>
+                </div>
+                <div class="col-md-6">
+                  <strong class="text-secondary">AVM STATUS</strong>
+                  <div class="text-dark font-weight-bold">{{productDetails.avmStatus}}</div>
+                </div>
+              </div>
+              <div class="row mt-3">
+                <div class="col-md-6">
+                  <strong class="text-secondary">PRODUCT</strong>
+                  <div class="text-dark font-weight-bold">{{productDetails.product}}</div>
+                </div>
+                <div class="col-md-6">
+                  <strong class="text-secondary">CORRECTION PRODUCT</strong>
+                  <div class="text-dark font-weight-bold">
+                    {{productDetails.product}}
+                  </div>
+                </div>
+              </div>
+              <div class="row mt-3">
+                <div class="col-md-12">
+                  <strong class="text-secondary">VENDOR</strong>
+                  <div class="text-dark font-weight-bold">{{productDetails.vendor}}</div>
+                  <div class="text-dark font-weight-bold">QC Score: {{productDetails.qcScore}}</div>
+                </div>
+              </div>
+              <div class="row mt-2 small pb-3 text-center text-danger">
+                <div class="col-md-4">
+                  <h4 class="small font-weight-bold">COMMENTS</h4>
+                  <p>{{productDetails.comments}}</p>
+                </div>
+                <div class="col-md-4">
+                  <h4 class="small font-weight-bold">PRIOR HISTORY</h4>
+                  <p>{{productDetails.priorHistory}}</p>
+                </div>
+                <div class="col-md-4">
+                  <h4 class="small font-weight-bold">TIMES REJECTED</h4>
+                  <p>{{productDetails.timesRejected}}</p>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
+        </ng-template>
+
+        <ng-template ngbSlide>
+          <div class="row shadow-lg text-white">
+            <div class="col-md-6 col-sm-12 bg-header">
+              <div class="row">
+                <div class="col-md-6">
+                  <strong class="text-secondary">COMMENTS</strong>
+                  <h4>{{orderDetails.orderNumber}}</h4>
+                  <div class="small">Created : {{orderDetails.orderCreationDate | date: 'dd/MM/yyyy'}}</div>
+                  <div class="small">Completed : {{orderDetails.orderCompletionDate | date: 'dd/MM/yyyy'}}</div>
+                  <div class="small">Close Date : {{orderDetails.orderCompletionDate | date: 'dd/MM/yyyy'}}</div>
+                </div>
+                <div class="col-md-6">
+                  <strong class="text-secondary">LOAN#</strong>
+                  <h4>{{orderDetails.loanNumber}}</h4>
+                </div>
+              </div>
+              <div class="row mt-3">
+                <div class="col-md-12">
+                  <strong class="text-secondary">LENDER</strong>
+                  <div>{{orderDetails.lender}}</div>
+                </div>
+              </div>
+              <div class="row mt-3">
+                <div class="col-md-12">
+                  <strong class="text-secondary">BORROWER</strong>
+                  <div>{{orderDetails.borrower}}</div>
+                </div>
+              </div>
+              <div class="row mt-3">
+                <div class="col-md-12">
+                  <strong class="text-secondary">Address</strong>
+                  <address>
+                    <div>{{orderDetails.address}}, {{orderDetails.state}}</div>
+                    <div>{{orderDetails.country}}</div>
+                  </address>
+                </div>
+              </div>
+              <div class="row mt-2 small pb-3 text-center">
+                <div class="col-md-4">
+                  <h4 class="small">LOAN PURPOSE</h4>
+                  <p>{{orderDetails.loanPurpose}}</p>
+                </div>
+                <div class="col-md-4">
+                  <h4 class="small">LOAN TYPE</h4>
+                  <p>{{orderDetails.loanType}}</p>
+                </div>
+                <div class="col-md-4">
+                  <h4 class="small">FHA CASES#</h4>
+                  <p>{{orderDetails.fhaCase}}</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-sm-12">
+              <div class="row">
+                <div class="col-md-6">
+                  <strong class="text-secondary text-uppercase">PREVIOUS COMMENTS</strong>
+                  <h4>{{orderDetails.orderNumber}}</h4>
+                  <div class="small">Created: {{orderDetails.orderCreationDate | date: 'dd/MM/yyyy'}}</div>
+                  <div class="small">Completed: {{orderDetails.orderCompletionDate | date: 'dd/MM/yyyy'}}</div>
+                  <div class="small">Close Date: {{orderDetails.orderCompletionDate | date: 'dd/MM/yyyy'}}</div>
+                </div>
+              </div>
+              <div class="row mt-3">
+                <div class="col-md-6">
+                  <strong class="text-secondary">MARKET VALUE</strong>
+                  <div class="text-dark font-weight-bold">{{productDetails.marketValue}}</div>
+                </div>
+                <div class="col-md-6">
+                  <strong class="text-secondary">AVM STATUS</strong>
+                  <div class="text-dark font-weight-bold">{{productDetails.avmStatus}}</div>
+                </div>
+              </div>
+              <div class="row mt-3">
+                <div class="col-md-6">
+                  <strong class="text-secondary">PRODUCT</strong>
+                  <div class="text-dark font-weight-bold">{{productDetails.product}}</div>
+                </div>
+                <div class="col-md-6">
+                  <strong class="text-secondary">CORRECTION PRODUCT</strong>
+                  <div class="text-dark font-weight-bold">
+                    {{productDetails.product}}
+                  </div>
+                </div>
+              </div>
+              <div class="row mt-3">
+                <div class="col-md-12">
+                  <strong class="text-secondary">VENDOR</strong>
+                  <div class="text-dark font-weight-bold">{{productDetails.vendor}}</div>
+                  <div class="text-dark font-weight-bold">QC Score: {{productDetails.qcScore}}</div>
+                </div>
+              </div>
+              <div class="row mt-2 small pb-3 text-center text-danger">
+                <div class="col-md-4">
+                  <h4 class="small font-weight-bold">COMMENTS</h4>
+                  <p>{{productDetails.comments}}</p>
+                </div>
+                <div class="col-md-4">
+                  <h4 class="small font-weight-bold">PRIOR HISTORY</h4>
+                  <p>{{productDetails.priorHistory}}</p>
+                </div>
+                <div class="col-md-4">
+                  <h4 class="small font-weight-bold">TIMES REJECTED</h4>
+                  <p>{{productDetails.timesRejected}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-template>
+        
+        <ng-template ngbSlide>
+          <div class="row shadow-lg text-white">
+            <div class="col-md-6 col-sm-12 bg-header">
+              <div class="row">
+                <div class="col-md-6">
+                  <strong class="text-secondary">ORDER#</strong>
+                  <h4>{{orderDetails.orderNumber}}</h4>
+                  <div class="small">Created : {{orderDetails.orderCreationDate | date: 'dd/MM/yyyy'}}</div>
+                  <div class="small">Completed : {{orderDetails.orderCompletionDate | date: 'dd/MM/yyyy'}}</div>
+                  <div class="small">Close Date : {{orderDetails.orderCompletionDate | date: 'dd/MM/yyyy'}}</div>
+                </div>
+                <div class="col-md-6">
+                  <strong class="text-secondary">LOAN#</strong>
+                  <h4>{{orderDetails.loanNumber}}</h4>
+                </div>
+              </div>
+              <div class="row mt-3">
+                <div class="col-md-12">
+                  <strong class="text-secondary">LENDER</strong>
+                  <div>{{orderDetails.lender}}</div>
+                </div>
+              </div>
+              <div class="row mt-3">
+                <div class="col-md-12">
+                  <strong class="text-secondary">BORROWER</strong>
+                  <div>{{orderDetails.borrower}}</div>
+                </div>
+              </div>
+              <div class="row mt-3">
+                <div class="col-md-12">
+                  <strong class="text-secondary">Address</strong>
+                  <address>
+                    <div>{{orderDetails.address}}, {{orderDetails.state}}</div>
+                    <div>{{orderDetails.country}}</div>
+                  </address>
+                </div>
+              </div>
+              <div class="row mt-2 small pb-3 text-center">
+                <div class="col-md-4">
+                  <h4 class="small">LOAN PURPOSE</h4>
+                  <p>{{orderDetails.loanPurpose}}</p>
+                </div>
+                <div class="col-md-4">
+                  <h4 class="small">LOAN TYPE</h4>
+                  <p>{{orderDetails.loanType}}</p>
+                </div>
+                <div class="col-md-4">
+                  <h4 class="small">FHA CASES#</h4>
+                  <p>{{orderDetails.fhaCase}}</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-sm-12">
+              <div class="row">
+                <div class="col-md-6">
+                  <strong class="text-secondary text-uppercase">{{productDetails.status}}</strong>
+                  <h4>{{orderDetails.orderNumber}}</h4>
+                  <div class="small">Created: {{orderDetails.orderCreationDate | date: 'dd/MM/yyyy'}}</div>
+                  <div class="small">Completed: {{orderDetails.orderCompletionDate | date: 'dd/MM/yyyy'}}</div>
+                  <div class="small">Close Date: {{orderDetails.orderCompletionDate | date: 'dd/MM/yyyy'}}</div>
+                </div>
+              </div>
+              <div class="row mt-3">
+                <div class="col-md-6">
+                  <strong class="text-secondary">MARKET VALUE</strong>
+                  <div class="text-dark font-weight-bold">{{productDetails.marketValue}}</div>
+                </div>
+                <div class="col-md-6">
+                  <strong class="text-secondary">AVM STATUS</strong>
+                  <div class="text-dark font-weight-bold">{{productDetails.avmStatus}}</div>
+                </div>
+              </div>
+              <div class="row mt-3">
+                <div class="col-md-6">
+                  <strong class="text-secondary">PRODUCT</strong>
+                  <div class="text-dark font-weight-bold">{{productDetails.product}}</div>
+                </div>
+                <div class="col-md-6">
+                  <strong class="text-secondary">CORRECTION PRODUCT</strong>
+                  <div class="text-dark font-weight-bold">
+                    {{productDetails.product}}
+                  </div>
+                </div>
+              </div>
+              <div class="row mt-3">
+                <div class="col-md-12">
+                  <strong class="text-secondary">VENDOR</strong>
+                  <div class="text-dark font-weight-bold">{{productDetails.vendor}}</div>
+                  <div class="text-dark font-weight-bold">QC Score: {{productDetails.qcScore}}</div>
+                </div>
+              </div>
+              <div class="row mt-2 small pb-3 text-center text-danger">
+                <div class="col-md-4">
+                  <h4 class="small font-weight-bold">COMMENTS</h4>
+                  <p>{{productDetails.comments}}</p>
+                </div>
+                <div class="col-md-4">
+                  <h4 class="small font-weight-bold">PRIOR HISTORY</h4>
+                  <p>{{productDetails.priorHistory}}</p>
+                </div>
+                <div class="col-md-4">
+                  <h4 class="small font-weight-bold">TIMES REJECTED</h4>
+                  <p>{{productDetails.timesRejected}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-template>
+      </ngb-carousel>
+      
     </div>
   </div>
 </div>
